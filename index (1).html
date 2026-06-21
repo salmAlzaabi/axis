@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void: #07050d;
+    --void-deep: #030208;
+    --axis-purple: #9d7ce8;
+    --axis-purple-soft: #c9b8f0;
+    --axis-purple-dim: #4a3a78;
+    --gold: #d4af6a;
+    --mist: #e8e2f5;
+    --mist-dim: #a89bc4;
+    --line: rgba(157,124,232,0.18);
+    --font-display: 'Cinzel', serif;
+    --font-body: 'Tajawal', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--void);
+    color: var(--mist);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ===== Ambient background ===== */
+  .bg-field{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(157,124,232,0.10), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 90%, rgba(157,124,232,0.06), transparent 60%),
+      var(--void-deep);
+  }
+  .bg-stars{
+    position: fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(232,226,245,0.4), transparent),
+      radial-gradient(1px 1px at 70% 60%, rgba(232,226,245,0.3), transparent),
+      radial-gradient(1px 1px at 40% 80%, rgba(232,226,245,0.35), transparent),
+      radial-gradient(1px 1px at 85% 20%, rgba(232,226,245,0.3), transparent),
+      radial-gradient(1px 1px at 10% 65%, rgba(232,226,245,0.25), transparent),
+      radial-gradient(1px 1px at 55% 15%, rgba(232,226,245,0.3), transparent),
+      radial-gradient(1px 1px at 92% 75%, rgba(232,226,245,0.25), transparent);
+    background-size: 100% 100%;
+  }
+
+  .axis-ring{
+    position: absolute;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* ===== Layout shell ===== */
+  .wrap{ position:relative; z-index:1; }
+  section{ padding: 120px 24px; position:relative; }
+  .container{ max-width: 980px; margin: 0 auto; }
+
+  .eyebrow{
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    color: var(--axis-purple-soft);
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:'';
+    width: 28px; height:1px;
+    background: linear-gradient(90deg, transparent, var(--axis-purple-dim));
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .hero-orbit{
+    position: relative;
+    width: 280px; height: 280px;
+    margin-bottom: 36px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero-orbit::before, .hero-orbit::after{
+    content:'';
+    position:absolute;
+    border-radius:50%;
+    border: 1px solid var(--axis-purple-dim);
+    animation: spin-slow 40s linear infinite;
+  }
+  .hero-orbit::before{ width: 100%; height:100%; }
+  .hero-orbit::after{ width: 130%; height:130%; border-color: rgba(157,124,232,0.10); animation-duration: 60s; animation-direction: reverse; }
+  @keyframes spin-slow{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+  .hero-logo{
+    width: 220px; height:220px;
+    border-radius:50%;
+    object-fit: cover;
+    box-shadow: 0 0 60px rgba(157,124,232,0.35), 0 0 120px rgba(157,124,232,0.15);
+    position:relative; z-index:2;
+  }
+
+  .hero h1{
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    background: linear-gradient(180deg, #fff 0%, var(--axis-purple-soft) 55%, var(--axis-purple) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+  }
+
+  .hero-tagline{
+    margin-top: 18px;
+    font-size: 1.05rem;
+    color: var(--mist-dim);
+    font-weight: 400;
+    max-width: 480px;
+    line-height: 1.8;
+  }
+
+  .hero-actions{
+    margin-top: 46px;
+    display:flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content:center;
+  }
+
+  .btn{
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 16px 38px;
+    border-radius: 100px;
+    cursor:pointer;
+    border: none;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap: 10px;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s;
+  }
+  .btn-primary{
+    background: linear-gradient(135deg, var(--axis-purple) 0%, #6f52b8 100%);
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(157,124,232,0.4);
+  }
+  .btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 14px 40px rgba(157,124,232,0.55); }
+  .btn-ghost{
+    background: rgba(157,124,232,0.06);
+    color: var(--axis-purple-soft);
+    border: 1px solid var(--line);
+  }
+  .btn-ghost:hover{ background: rgba(157,124,232,0.12); transform: translateY(-3px); }
+
+  .scroll-cue{
+    position:absolute;
+    bottom: 36px;
+    left:50%; transform: translateX(-50%);
+    color: var(--mist-dim);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    opacity:0.6;
+  }
+  .scroll-cue .line{ width:1px; height:30px; background: linear-gradient(180deg, var(--axis-purple), transparent); animation: pulse-line 2s ease-in-out infinite; }
+  @keyframes pulse-line{ 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  /* ===== STATS ===== */
+  .stats-section{ padding-top: 60px; padding-bottom: 60px; }
+  .stats-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 50px;
+  }
+  .stat-card{
+    background: linear-gradient(160deg, rgba(157,124,232,0.07), rgba(255,255,255,0.01));
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 36px 24px;
+    text-align:center;
+    backdrop-filter: blur(8px);
+    position:relative;
+    overflow:hidden;
+  }
+  .stat-card::before{
+    content:'';
+    position:absolute;
+    top:-50%; left:-50%;
+    width:200%; height:200%;
+    background: radial-gradient(circle at 50% 50%, rgba(157,124,232,0.08), transparent 60%);
+    pointer-events:none;
+  }
+  .stat-dot{
+    width:10px; height:10px;
+    border-radius:50%;
+    margin: 0 auto 16px;
+    background: var(--axis-purple);
+    box-shadow: 0 0 14px var(--axis-purple);
+  }
+  .stat-dot.online{ background:#5ee8a0; box-shadow:0 0 14px #5ee8a0; }
+  .stat-value{
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #fff;
+    line-height:1;
+  }
+  .stat-label{
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--mist-dim);
+    letter-spacing: 0.05em;
+  }
+  .stats-note{
+    text-align:center;
+    margin-top: 26px;
+    font-size: 0.8rem;
+    color: var(--mist-dim);
+    opacity: 0.65;
+  }
+
+  /* ===== RULES ===== */
+  .rules-section{ padding-top: 60px; }
+  .rules-header{ text-align:center; margin-bottom: 60px; }
+  .rules-title{
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color:#fff;
+    font-weight: 700;
+  }
+  .rules-sub{
+    margin-top: 14px;
+    color: var(--mist-dim);
+    font-size: 1rem;
+  }
+
+  .rules-list{
+    display:flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .rule-item{
+    display:grid;
+    grid-template-columns: 64px 1fr;
+    gap: 22px;
+    padding: 26px 8px;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+  .rule-item:last-child{ border-bottom:none; }
+  .rule-num{
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--axis-purple-dim);
+    font-weight: 700;
+    text-align:center;
+    padding-top: 2px;
+  }
+  .rule-text h3{
+    font-size: 1.05rem;
+    color: var(--mist);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .rule-text p{
+    font-size: 0.92rem;
+    color: var(--mist-dim);
+    line-height: 1.8;
+  }
+
+  .rules-footer{
+    margin-top: 50px;
+    text-align:center;
+    padding: 30px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: rgba(157,124,232,0.04);
+  }
+  .rules-footer p{ color: var(--mist-dim); font-size: 0.95rem; line-height:1.8; }
+  .rules-footer strong{ color: var(--gold); }
+
+  /* ===== FOOTER ===== */
+  .site-footer{
+    padding: 60px 24px 100px;
+    text-align:center;
+    border-top: 1px solid var(--line);
+  }
+  .footer-logo{
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    color: var(--axis-purple-soft);
+    margin-bottom: 12px;
+  }
+  .site-footer p{ color: var(--mist-dim); font-size: 0.82rem; }
+
+  /* ===== Sticky join button ===== */
+  .sticky-join{
+    position: fixed;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120%);
+    z-index: 50;
+    transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
+  }
+  .sticky-join.show{ transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 720px){
+    section{ padding: 90px 18px; }
+    .stats-grid{ grid-template-columns: 1fr; gap: 14px; }
+    .rule-item{ grid-template-columns: 40px 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-field"></div>
+<div class="bg-stars"></div>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orbit">
+      <img src="logo.png" alt="Axis" class="hero-logo">
+    </div>
+    <h1>AXIS</h1>
+    <p class="hero-tagline">المحور الذي يجمعنا. مجتمع مبني على الاحترام، الالتزام، والانضباط.</p>
+    <div class="hero-actions">
+      <a href="https://discord.gg/hXSq7nK2ee" target="_blank" class="btn btn-primary">
+        انضم إلى السيرفر
+      </a>
+      <a href="#rules" class="btn btn-ghost">اطّلع على القوانين</a>
+    </div>
+    <div class="scroll-cue">
+      <span>استمر بالتمرير</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="eyebrow">نبض المجتمع</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-dot"></div>
+          <div class="stat-value" id="memberCount">—</div>
+          <div class="stat-label">عضو</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-dot online"></div>
+          <div class="stat-value" id="onlineCount">—</div>
+          <div class="stat-label">متصل الآن</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-dot"></div>
+          <div class="stat-value" id="serverName">Axis</div>
+          <div class="stat-label">اسم السيرفر</div>
+        </div>
+      </div>
+      <p class="stats-note">إحصائيات مباشرة عبر Discord</p>
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section class="rules-section" id="rules">
+    <div class="container">
+      <div class="rules-header">
+        <div class="eyebrow" style="justify-content:center;">القوانين</div>
+        <h2 class="rules-title">قوانين Axis</h2>
+        <p class="rules-sub">التزامك بها يحافظ على بيئة محترمة لكل الأعضاء</p>
+      </div>
+
+      <div class="rules-list">
+        <div class="rule-item">
+          <div class="rule-num">01</div>
+          <div class="rule-text">
+            <h3>الاحترام أولًا</h3>
+            <p>احترام جميع الأعضاء والإدارة واجب على كل من ينضم للسيرفر.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">02</div>
+          <div class="rule-text">
+            <h3>منع التنمر والاستفزاز</h3>
+            <p>يمنع التنمر، الإهانة، الاستفزاز أو التقليل من الآخرين بأي شكل.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">03</div>
+          <div class="rule-text">
+            <h3>احترام الأديان والمعتقدات</h3>
+            <p>يمنع الإساءة أو السخرية أو الاستفزاز تجاه أي دين أو معتقد. النقاشات الدينية يجب أن تكون باحترام ودون تعصب أو إساءة.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">04</div>
+          <div class="rule-text">
+            <h3>احترام الدول والجنسيات</h3>
+            <p>يمنع شتم الدول أو الشعوب أو الجنسيات، ويمنع نشر العنصرية أو التمييز أو إثارة الفتن بين الجنسيات.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">05</div>
+          <div class="rule-text">
+            <h3>ممنوع السب والشتم</h3>
+            <p>يمنع استخدام الألفاظ المسيئة أو العنصرية أو الطائفية تحت أي ظرف.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">06</div>
+          <div class="rule-text">
+            <h3>عدم نشر المحتوى غير اللائق</h3>
+            <p>يمنع نشر أي محتوى إباحي، دموي، أو غير مناسب داخل السيرفر.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">07</div>
+          <div class="rule-text">
+            <h3>ممنوع السبام</h3>
+            <p>يمنع تكرار الرسائل، الإيموجيات بشكل مزعج، أو المنشن العشوائي.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">08</div>
+          <div class="rule-text">
+            <h3>الإعلانات ممنوعة</h3>
+            <p>يمنع نشر سيرفرات أو روابط أو حسابات بدون إذن الإدارة.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">09</div>
+          <div class="rule-text">
+            <h3>الالتزام بالقنوات</h3>
+            <p>استخدم كل روم للغرض المخصص له فقط.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">10</div>
+          <div class="rule-text">
+            <h3>ممنوع إثارة المشاكل</h3>
+            <p>يمنع افتعال المشاكل أو التحريض بين الأعضاء.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">11</div>
+          <div class="rule-text">
+            <h3>الحفاظ على الخصوصية</h3>
+            <p>يمنع نشر معلومات شخصية لك أو لغيرك داخل السيرفر.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">12</div>
+          <div class="rule-text">
+            <h3>ممنوع انتحال الشخصيات</h3>
+            <p>يمنع تقليد أو انتحال الإدارة أو أي عضو آخر.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">13</div>
+          <div class="rule-text">
+            <h3>احترام قرارات الإدارة</h3>
+            <p>إذا عندك اعتراض أو شكوى استخدم التذاكر أو تواصل مع الإدارة باحترام.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rules-footer">
+        <p>مخالفة هذه القوانين تعرّضك لإجراءات قد تصل إلى <strong>الطرد النهائي</strong> من السيرفر. التزامك يحمي مجتمعنا.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-logo">AXIS</div>
+    <p>© 2026 Axis. جميع الحقوق محفوظة.</p>
+  </footer>
+
+</div>
+
+<a href="https://discord.gg/hXSq7nK2ee" target="_blank" class="btn btn-primary sticky-join" id="stickyJoin">
+  انضم إلى السيرفر
+</a>
+
+<script>
+  // Sticky join button appears after hero
+  const stickyJoin = document.getElementById('stickyJoin');
+  const hero = document.querySelector('.hero');
+  window.addEventListener('scroll', () => {
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    if(heroBottom < 0){ stickyJoin.classList.add('show'); }
+    else{ stickyJoin.classList.remove('show'); }
+  });
+
+  // Live Discord stats via public invite API
+  const INVITE_CODE = 'hXSq7nK2ee';
+
+  async function loadDiscordStats(){
+    try{
+      const res = await fetch(`https://discord.com/api/v10/invites/${INVITE_CODE}?with_counts=true&with_expiration=true`);
+      if(!res.ok) throw new Error('invite fetch failed');
+      const data = await res.json();
+
+      const memberCount = data.approximate_member_count;
+      const onlineCount = data.approximate_presence_count;
+      const guildName = data.guild && data.guild.name ? data.guild.name : 'Axis';
+
+      animateCount(document.getElementById('memberCount'), memberCount);
+      animateCount(document.getElementById('onlineCount'), onlineCount);
+      document.getElementById('serverName').textContent = guildName;
+
+    }catch(err){
+      document.getElementById('memberCount').textContent = '—';
+      document.getElementById('onlineCount').textContent = '—';
+      console.warn('Could not load Discord stats:', err);
+    }
+  }
+
+  function animateCount(el, target){
+    if(target == null){ el.textContent = '—'; return; }
+    let current = 0;
+    const steps = 40;
+    const increment = target / steps;
+    const interval = setInterval(() => {
+      current += increment;
+      if(current >= target){
+        el.textContent = target.toLocaleString('en-US');
+        clearInterval(interval);
+      } else {
+        el.textContent = Math.floor(current).toLocaleString('en-US');
+      }
+    }, 25);
+  }
+
+  loadDiscordStats();
+</script>
+
+</body>
+</html>
