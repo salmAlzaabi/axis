@@ -422,7 +422,7 @@
         <div class="product-desc">يمكنك إرسال الصور في الشات.</div>
         <div class="product-foot">
           <span class="product-price">300 نقطة</span>
-          <button class="add-btn" data-id="photo-role" data-name="رول الصور" data-price="300">إضافة</button>
+          <button class="add-btn" data-type="points" data-id="photo-role" data-name="رول الصور" data-price="300">إضافة</button>
         </div>
       </div>
       <div class="product-card">
@@ -431,7 +431,7 @@
         <div class="product-desc">إنشاء رتبة خاصة باسمك.</div>
         <div class="product-foot">
           <span class="product-price">600 نقطة</span>
-          <button class="add-btn" data-id="custom-role" data-name="كوستم رول" data-price="600">إضافة</button>
+          <button class="add-btn" data-type="points" data-id="custom-role" data-name="كوستم رول" data-price="600">إضافة</button>
         </div>
       </div>
     </div>
@@ -444,7 +444,7 @@
         <div class="product-desc">إضافة لون واحد لرتبتك الخاصة.</div>
         <div class="product-foot">
           <span class="product-price">50 نقطة</span>
-          <button class="add-btn" data-id="one-color" data-name="إضافة لون واحد" data-price="50">إضافة</button>
+          <button class="add-btn" data-type="points" data-id="one-color" data-name="إضافة لون واحد" data-price="50">إضافة</button>
         </div>
       </div>
       <div class="product-card">
@@ -453,18 +453,58 @@
         <div class="product-desc">إضافة لونين متدرجين لرتبتك الخاصة.</div>
         <div class="product-foot">
           <span class="product-price">100 نقطة</span>
-          <button class="add-btn" data-id="two-colors" data-name="إضافة لونين" data-price="100">إضافة</button>
+          <button class="add-btn" data-type="points" data-id="two-colors" data-name="إضافة لونين" data-price="100">إضافة</button>
         </div>
       </div>
     </div>
 
-    <div class="group-title"><span class="eyebrow" style="margin:0;"><span class="dash"></span>أسعار النقاط</span></div>
-    <div class="price-table">
-      <div class="price-row"><span>100 نقطة</span><span>1.5 ريال</span></div>
-      <div class="price-row"><span>200 نقطة</span><span>3 ريال</span></div>
-      <div class="price-row"><span>300 نقطة</span><span>4.5 ريال</span></div>
-      <div class="price-row"><span>500 نقطة</span><span>7.5 ريال</span></div>
-      <div class="price-row"><span>1000 نقطة</span><span>15 ريال</span></div>
+    <div class="group-title"><span class="eyebrow" style="margin:0;"><span class="dash"></span>شحن النقاط</span></div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-icon">💎</div>
+        <div class="product-name">100 نقطة</div>
+        <div class="product-desc">شحن 100 نقطة لحسابك.</div>
+        <div class="product-foot">
+          <span class="product-price">1.5 ريال</span>
+          <button class="add-btn" data-type="riyal" data-id="points-100" data-name="100 نقطة" data-price="1.5">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">💎</div>
+        <div class="product-name">200 نقطة</div>
+        <div class="product-desc">شحن 200 نقطة لحسابك.</div>
+        <div class="product-foot">
+          <span class="product-price">3 ريال</span>
+          <button class="add-btn" data-type="riyal" data-id="points-200" data-name="200 نقطة" data-price="3">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">💎</div>
+        <div class="product-name">300 نقطة</div>
+        <div class="product-desc">شحن 300 نقطة لحسابك.</div>
+        <div class="product-foot">
+          <span class="product-price">4.5 ريال</span>
+          <button class="add-btn" data-type="riyal" data-id="points-300" data-name="300 نقطة" data-price="4.5">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">💎</div>
+        <div class="product-name">500 نقطة</div>
+        <div class="product-desc">شحن 500 نقطة لحسابك.</div>
+        <div class="product-foot">
+          <span class="product-price">7.5 ريال</span>
+          <button class="add-btn" data-type="riyal" data-id="points-500" data-name="500 نقطة" data-price="7.5">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">💎</div>
+        <div class="product-name">1000 نقطة</div>
+        <div class="product-desc">شحن 1000 نقطة لحسابك.</div>
+        <div class="product-foot">
+          <span class="product-price">15 ريال</span>
+          <button class="add-btn" data-type="riyal" data-id="points-1000" data-name="1000 نقطة" data-price="15">إضافة</button>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -536,9 +576,10 @@
     btn.addEventListener('click', () => {
       const id = btn.dataset.id;
       const name = btn.dataset.name;
-      const price = parseInt(btn.dataset.price, 10);
+      const price = parseFloat(btn.dataset.price);
+      const type = btn.dataset.type === 'riyal' ? 'riyal' : 'points'; // 'riyal' = شحن نقاط (يدفع ريال) | 'points' = منتج يشترى بالنقاط
       if(cart[id]){ cart[id].qty += 1; }
-      else{ cart[id] = { name, price, qty: 1 }; }
+      else{ cart[id] = { name, price, qty: 1, type }; }
       renderCart();
       openDrawer();
     });
@@ -556,10 +597,11 @@
     renderCart();
   }
 
+  function unitLabel(type){ return type === 'riyal' ? 'ريال' : 'نقطة'; }
+
   function renderCart(){
     const ids = Object.keys(cart);
     let totalCount = 0;
-    let totalPrice = 0;
 
     if(ids.length === 0){
       drawerBody.innerHTML = '<p class="drawer-empty">السلة فاضية</p>';
@@ -568,12 +610,13 @@
       drawerBody.innerHTML = ids.map(id => {
         const item = cart[id];
         totalCount += item.qty;
-        totalPrice += item.qty * item.price;
+        const lineTotal = item.qty * item.price;
+        const unit = unitLabel(item.type);
         return `
           <div class="cart-item">
             <div class="ci-info">
               <div class="ci-name">${item.name}</div>
-              <div class="ci-price">${item.price} نقطة × ${item.qty} = ${item.price * item.qty} نقطة</div>
+              <div class="ci-price">${item.price} ${unit} × ${item.qty} = ${lineTotal} ${unit}</div>
             </div>
             <div class="ci-controls">
               <button class="qty-btn" onclick="changeQty('${id}', -1)">−</button>
@@ -587,14 +630,21 @@
       checkoutBtn.disabled = false;
     }
 
-    ids.forEach(id => { /* recompute already done above */ });
+    let totalRiyal = 0;
+    let totalPoints = 0;
+    totalCount = 0;
+    ids.forEach(id => {
+      const item = cart[id];
+      totalCount += item.qty;
+      if(item.type === 'riyal'){ totalRiyal += item.qty * item.price; }
+      else{ totalPoints += item.qty * item.price; }
+    });
 
-    if(ids.length > 0){
-      totalCount = 0; totalPrice = 0;
-      ids.forEach(id => { totalCount += cart[id].qty; totalPrice += cart[id].qty * cart[id].price; });
-    }
+    const totalParts = [];
+    if(totalRiyal > 0) totalParts.push(totalRiyal.toFixed(2).replace(/\.00$/, '') + ' ريال');
+    if(totalPoints > 0) totalParts.push(totalPoints + ' نقطة');
+    cartTotal.textContent = totalParts.length ? totalParts.join(' + ') : '0';
 
-    cartTotal.textContent = totalPrice + ' نقطة';
     if(totalCount > 0){
       cartCount.style.display = 'flex';
       cartCount.textContent = totalCount;
@@ -619,10 +669,6 @@
     checkoutModal.classList.remove('show');
   });
 
-  function pointsToRiyal(points){
-    return (points * 0.015).toFixed(2);
-  }
-
   function generateOrderNumber(){
     return Math.floor(100000 + Math.random() * 900000).toString();
   }
@@ -638,30 +684,51 @@
     const ids = Object.keys(cart);
     if(ids.length === 0) return;
 
+    let totalRiyal = 0;
     let totalPoints = 0;
-    const lines = ids.map(id => {
+    const riyalLines = [];
+    const pointsLines = [];
+
+    ids.forEach(id => {
       const item = cart[id];
-      totalPoints += item.qty * item.price;
-      return `**${item.name}** × ${item.qty} — ${item.qty * item.price} نقطة`;
+      const lineTotal = item.qty * item.price;
+      if(item.type === 'riyal'){
+        totalRiyal += lineTotal;
+        riyalLines.push(`**${item.name}** × ${item.qty} — ${lineTotal} ريال`);
+      } else {
+        totalPoints += lineTotal;
+        pointsLines.push(`**${item.name}** × ${item.qty} — ${lineTotal} نقطة`);
+      }
     });
 
     const orderNumber = generateOrderNumber();
-    const riyalValue = pointsToRiyal(totalPoints);
 
     checkoutConfirmBtn.disabled = true;
     checkoutConfirmBtn.innerHTML = 'جاري الإرسال<span class="spinner"></span>';
+
+    const fields = [
+      { name: '👤 المستخدم', value: username, inline: true },
+      { name: '🔖 رقم الطلب', value: `#${orderNumber}`, inline: true }
+    ];
+
+    if(riyalLines.length){
+      fields.push({ name: '💵 شحن نقاط (يدفع ريال)', value: riyalLines.join('\n') });
+    }
+    if(pointsLines.length){
+      fields.push({ name: '🎭 منتجات (تخصم من النقاط)', value: pointsLines.join('\n') });
+    }
+
+    const summaryParts = [];
+    if(totalRiyal > 0) summaryParts.push(`💵 ${totalRiyal.toFixed(2).replace(/\.00$/, '')} ريال (دفع)`);
+    if(totalPoints > 0) summaryParts.push(`🎭 ${totalPoints} نقطة (خصم من الرصيد)`);
+    fields.push({ name: '💰 الإجمالي', value: summaryParts.join(' + ') });
 
     const payload = {
       content: `📦 طلب شراء جديد من **${username}**`,
       embeds: [{
         title: `🛒 طلب جديد — رقم #${orderNumber}`,
         color: 0x9d7ce8,
-        fields: [
-          { name: '👤 المستخدم', value: username, inline: true },
-          { name: '🔖 رقم الطلب', value: `#${orderNumber}`, inline: true },
-          { name: '📋 المنتجات', value: lines.join('\n') },
-          { name: '💰 الإجمالي', value: `${totalPoints} نقطة (≈ ${riyalValue} ريال)` }
-        ],
+        fields: fields,
         footer: { text: 'Axis Shop' },
         timestamp: new Date().toISOString()
       }]
