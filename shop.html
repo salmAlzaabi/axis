@@ -708,9 +708,13 @@
 
     const payload = {
       embeds: [{
-        title: `طلب #${orderNumber}`,
+        title: `📌 طلب جديد | (رقم الطلب ${orderNumber})`,
         color: 0x9d7ce8,
-        description: `**${username}**\n\n${lines.join('\n')}\n\n**الإجمالي:** ${totalParts.join(' + ')}`,
+        fields: [
+          { name: '👤 العميل', value: `@${username}` },
+          { name: '🛒 المنتجات', value: lines.join('\n') },
+          { name: '💰 اجمالي المبلغ', value: totalParts.join(' + ') }
+        ],
         timestamp: new Date().toISOString()
       }]
     };
