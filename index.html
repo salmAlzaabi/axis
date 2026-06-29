@@ -114,6 +114,55 @@
   }
   .nav-cta:hover{ background: var(--axis-purple-deep) !important; color: #fff !important; }
 
+  /* ===== Mobile menu ===== */
+  .menu-toggle{
+    display:none;
+    background: rgba(157,124,232,0.1);
+    border: 1px solid var(--line-deep);
+    color: var(--ink);
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    cursor:pointer;
+    align-items:center; justify-content:center;
+    flex-direction:column;
+    gap: 4px;
+  }
+  .menu-toggle span{
+    width: 16px; height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  .menu-toggle.open span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2){ opacity:0; }
+  .menu-toggle.open span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+  .mobile-dropdown{
+    position: absolute;
+    top: 100%; left:0; right:0;
+    background: var(--paper-soft);
+    border-bottom: 1px solid var(--line-deep);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+  }
+  .mobile-dropdown.open{ max-height: 220px; }
+  .mobile-dropdown a{
+    display:block;
+    padding: 16px 24px;
+    color: var(--ink-soft);
+    text-decoration:none;
+    font-size: 0.95rem;
+    font-weight:500;
+    border-top: 1px solid var(--line);
+  }
+  .mobile-dropdown a:hover{ color: var(--axis-purple); background: rgba(157,124,232,0.06); }
+  .mobile-dropdown a.nav-cta{
+    margin: 14px 24px;
+    text-align:center;
+    border-top:none;
+  }
+
   /* ===== HERO ===== */
   .hero{
     padding: 90px 24px 80px;
@@ -346,7 +395,8 @@
     section{ padding: 70px 16px; }
     .stats-grid{ grid-template-columns: 1fr; }
     .article{ grid-template-columns: 48px 1fr; }
-    .nav-links a:not(.nav-cta){ display:none; }
+    .nav-links a{ display:none; }
+    .menu-toggle{ display:flex; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -369,7 +419,15 @@
       <a href="#rules">القوانين</a>
       <a href="shop.html">المتجر</a>
       <a href="https://discord.gg/hXSq7nK2ee" target="_blank" class="nav-cta">انضم إلينا</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
+  </div>
+  <div class="mobile-dropdown" id="mobileDropdown">
+    <a href="#rules">القوانين</a>
+    <a href="shop.html">المتجر</a>
+    <a href="https://discord.gg/hXSq7nK2ee" target="_blank" class="nav-cta">انضم إلينا</a>
   </div>
 </header>
 
@@ -379,6 +437,7 @@
     <div class="hero-logo-wrap">
       <img src="logo.png" alt="Axis" class="hero-logo">
     </div>
+    <div class="hero-badge"><span class="dot"></span>سيرفر نشط</div>
     <h1>AXIS</h1>
     <p class="hero-tagline">المحور الذي يجمعنا. مجتمع مبني على الاحترام، الالتزام، والانضباط.</p>
     <div class="hero-actions">
@@ -534,6 +593,20 @@
 </a>
 
 <script>
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileDropdown = document.getElementById('mobileDropdown');
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    mobileDropdown.classList.toggle('open');
+  });
+  mobileDropdown.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menuToggle.classList.remove('open');
+      mobileDropdown.classList.remove('open');
+    });
+  });
+
   // Sticky join button appears after hero
   const stickyJoin = document.getElementById('stickyJoin');
   const hero = document.querySelector('.hero');
