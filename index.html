@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Axis</title>
+<title>متجر Axis</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -20,6 +20,7 @@
     --ink: #e8e2f5;
     --ink-soft: #a89bc4;
     --gold: #d4af6a;
+    --green: #5ee8a0;
     --font-display: 'Cinzel', serif;
     --font-body: 'Tajawal', sans-serif;
   }
@@ -33,13 +34,11 @@
     font-family: var(--font-body);
     overflow-x: hidden;
     position: relative;
+    min-height: 100vh;
   }
 
-  /* ===== Ambient background ===== */
   .bg-field{
-    position: fixed;
-    inset: 0;
-    z-index: 0;
+    position: fixed; inset: 0; z-index: 0;
     background:
       radial-gradient(ellipse 80% 50% at 50% 0%, rgba(157,124,232,0.10), transparent 60%),
       radial-gradient(ellipse 60% 40% at 80% 90%, rgba(157,124,232,0.06), transparent 60%),
@@ -59,8 +58,8 @@
   }
   .wrap{ position:relative; z-index:1; }
 
-  section{ padding: 96px 24px; position:relative; }
-  .container{ max-width: 920px; margin: 0 auto; }
+  section{ padding: 60px 24px 100px; position:relative; }
+  .container{ max-width: 980px; margin: 0 auto; }
 
   .eyebrow{
     font-family: var(--font-body);
@@ -72,11 +71,11 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
   }
   .eyebrow .dash{ width: 26px; height:2px; background: var(--axis-purple); border-radius: 2px; }
 
-  /* ===== HEADER / NAV ===== */
+  /* HEADER */
   .site-header{
     position: sticky; top:0; z-index: 40;
     background: rgba(7,5,13,0.85);
@@ -84,7 +83,7 @@
     border-bottom: 1px solid var(--line);
   }
   .nav-inner{
-    max-width: 920px; margin:0 auto;
+    max-width: 980px; margin:0 auto;
     padding: 16px 24px;
     display:flex; align-items:center; justify-content:space-between;
   }
@@ -94,9 +93,10 @@
     font-weight:700; letter-spacing:0.08em;
     color: #fff;
     font-size: 1.05rem;
+    text-decoration:none;
   }
   .nav-brand img{ width:30px; height:30px; border-radius:50%; object-fit:cover; transform:scale(1.12); }
-  .nav-links{ display:flex; gap: 28px; align-items:center; }
+  .nav-links{ display:flex; gap: 22px; align-items:center; }
   .nav-links a{
     color: var(--ink-soft);
     text-decoration:none;
@@ -114,239 +114,266 @@
   }
   .nav-cta:hover{ background: var(--axis-purple-deep) !important; color: #fff !important; }
 
-  /* ===== HERO ===== */
-  .hero{
-    padding: 90px 24px 80px;
-    text-align:center;
-    border-bottom: 1px solid var(--line);
-    background: transparent;
-  }
-  .hero-logo-wrap{
-    width: 110px; height:110px;
-    margin: 0 auto 32px;
-    border-radius:50%;
-    overflow:hidden;
-    border: 1px solid var(--line-deep);
-    box-shadow: 0 0 40px rgba(157,124,232,0.3);
-  }
-  .hero-logo{
-    width:100%; height:100%;
-    object-fit:cover;
-    transform: scale(1.12);
-    display:block;
-  }
-
-  .hero-badge{
-    display:inline-flex; align-items:center; gap:8px;
+  .cart-btn{
+    position: relative;
     background: rgba(157,124,232,0.1);
     border: 1px solid var(--line-deep);
-    color: #c9b8f0;
-    font-size: 0.72rem;
-    font-weight:700;
-    letter-spacing:0.1em;
-    padding: 6px 16px;
-    border-radius: 100px;
-    margin-bottom: 26px;
-  }
-  .hero-badge .dot{ width:6px; height:6px; border-radius:50%; background:#5ee8a0; box-shadow:0 0 8px #5ee8a0; }
-
-  .hero h1{
-    font-family: var(--font-display);
-    font-size: clamp(2.6rem, 7vw, 4.2rem);
-    font-weight: 900;
-    letter-spacing: 0.06em;
-    background: linear-gradient(180deg, #fff 0%, #c9b8f0 55%, var(--axis-purple) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    line-height: 1.05;
-  }
-
-  .hero-tagline{
-    margin-top: 22px;
-    font-size: 1.08rem;
-    color: var(--ink-soft);
-    font-weight: 400;
-    max-width: 520px;
-    line-height: 1.9;
-    margin-left:auto; margin-right:auto;
-  }
-
-  .hero-actions{
-    margin-top: 38px;
-    display:flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content:center;
-  }
-
-  .btn{
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 0.94rem;
-    padding: 14px 32px;
+    color: var(--ink);
+    width: 40px; height: 40px;
     border-radius: 8px;
+    display:flex; align-items:center; justify-content:center;
     cursor:pointer;
-    border: none;
-    text-decoration:none;
-    display:inline-flex;
-    align-items:center;
-    gap: 8px;
-    transition: transform 0.25s, box-shadow 0.25s, background 0.25s, border-color 0.25s;
+    font-size: 1.1rem;
   }
-  .btn-primary{
-    background: linear-gradient(135deg, var(--axis-purple) 0%, #6f52b8 100%);
-    color: #fff;
-    box-shadow: 0 8px 30px rgba(157,124,232,0.4);
-  }
-  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 14px 40px rgba(157,124,232,0.55); }
-  .btn-ghost{
-    background: rgba(157,124,232,0.06);
-    color: #c9b8f0;
-    border: 1px solid var(--line-deep);
-  }
-  .btn-ghost:hover{ border-color: var(--axis-purple); background: rgba(157,124,232,0.12); }
-
-  /* ===== STATS ===== */
-  .stats-section{ padding-top: 64px; padding-bottom: 64px; background: transparent; }
-  .stats-grid{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    margin-top: 36px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  .stat-card{
-    background: var(--paper-soft);
-    padding: 32px 20px;
-    text-align:center;
-  }
-  .stat-dot{
-    width:7px; height:7px;
-    border-radius:50%;
-    margin: 0 auto 14px;
-    background: var(--axis-purple);
-  }
-  .stat-dot.online{ background:#5ee8a0; box-shadow:0 0 10px #5ee8a0; }
-  .stat-value{
-    font-family: var(--font-display);
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #fff;
-    line-height:1;
-  }
-  .stat-label{
-    margin-top: 10px;
-    font-size: 0.86rem;
-    color: var(--ink-soft);
-  }
-  .stats-note{
-    text-align:center;
-    margin-top: 22px;
-    font-size: 0.82rem;
-    color: var(--ink-soft);
+  .cart-btn:hover{ border-color: var(--axis-purple); }
+  .cart-count{
+    position:absolute; top:-7px; right:-7px;
+    background: var(--gold);
+    color: #1a1208;
+    font-size: 0.68rem;
+    font-weight: 800;
+    min-width: 18px; height: 18px;
+    border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    padding: 0 4px;
   }
 
-  /* ===== RULES — formal charter / numbered articles ===== */
-  .rules-section{ padding-top: 64px; background: transparent; border-top: 1px solid var(--line); }
-  .rules-header{ text-align:center; margin-bottom: 50px; }
-  .rules-title{
+  /* PAGE HEADER */
+  .page-head{ text-align:center; padding-top: 50px; margin-bottom: 50px; }
+  .page-head h1{
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4.5vw, 2.7rem);
-    color: #fff;
-    font-weight: 700;
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    background: linear-gradient(180deg, #fff 0%, #c9b8f0 55%, var(--axis-purple) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .rules-sub{
+  .page-head p{
     margin-top: 14px;
     color: var(--ink-soft);
-    font-size: 0.98rem;
-    max-width: 460px;
+    font-size: 1rem;
+    max-width: 480px;
     margin-left:auto; margin-right:auto;
-    line-height: 1.85;
+    line-height: 1.8;
   }
 
-  .charter{
+  /* SECTIONS */
+  .group-title{
+    display:flex; align-items:center; gap:10px;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 22px;
+    margin-top: 46px;
+  }
+  .group-title:first-of-type{ margin-top:0; }
+
+  .products-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .product-card{
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px;
+    display:flex;
+    flex-direction:column;
+    gap: 14px;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .product-card:hover{ border-color: var(--line-deep); }
+
+  .product-icon{ font-size: 1.8rem; }
+  .product-name{ font-weight: 700; font-size: 1.05rem; color: #fff; }
+  .product-desc{ color: var(--ink-soft); font-size: 0.86rem; line-height: 1.7; flex-grow:1; }
+  .product-foot{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-top: 6px;
+  }
+  .product-price{
+    color: var(--gold); font-weight: 800; font-size: 0.95rem;
+  }
+  .add-btn{
+    background: var(--axis-purple);
+    color: #0a0712;
+    border: none;
+    font-weight: 700;
+    font-size: 0.84rem;
+    padding: 9px 18px;
+    border-radius: 7px;
+    cursor:pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .add-btn:hover{ background: var(--axis-purple-deep); color:#fff; }
+  .add-btn:active{ transform: scale(0.96); }
+
+  /* PRICE TABLE */
+  .price-table{
     border: 1px solid var(--line);
     border-radius: 14px;
     overflow: hidden;
     background: var(--paper-soft);
   }
-  .article{
-    display: grid;
-    grid-template-columns: 64px 1fr;
+  .price-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+  }
+  .price-row:last-child{ border-bottom:none; }
+  .price-row span:first-child{ color: var(--ink-soft); }
+  .price-row span:last-child{ color: var(--gold); font-weight: 700; }
+
+  /* ===== CART DRAWER ===== */
+  .overlay{
+    position: fixed; inset:0; background: rgba(3,2,8,0.7);
+    z-index: 60; opacity:0; pointer-events:none; transition: opacity 0.3s;
+  }
+  .overlay.show{ opacity:1; pointer-events:auto; }
+
+  .drawer{
+    position: fixed; top:0; left:0; height:100vh; width: 380px; max-width: 92vw;
+    background: var(--paper-soft);
+    border-right: 1px solid var(--line-deep);
+    z-index: 61;
+    transform: translateX(-105%);
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+    display:flex; flex-direction:column;
+  }
+  .drawer.show{ transform: translateX(0); }
+
+  .drawer-head{
+    padding: 22px 22px 18px;
+    border-bottom: 1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .drawer-head h2{ font-family: var(--font-display); font-size: 1.2rem; color:#fff; }
+  .drawer-close{
+    background:none; border:none; color: var(--ink-soft); font-size: 1.3rem; cursor:pointer; line-height:1;
+  }
+  .drawer-close:hover{ color: var(--axis-purple); }
+
+  .drawer-body{ flex-grow:1; overflow-y:auto; padding: 16px 22px; }
+  .drawer-empty{ color: var(--ink-soft); text-align:center; margin-top: 60px; font-size: 0.92rem; }
+
+  .cart-item{
+    display:flex; align-items:center; justify-content:space-between;
+    gap: 10px;
+    padding: 14px 0;
     border-bottom: 1px solid var(--line);
   }
-  .article:last-child{ border-bottom: none; }
-  .article-num{
-    display:flex; align-items:flex-start; justify-content:center;
-    padding: 26px 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: var(--axis-purple);
-    background: var(--paper);
-    border-left: 1px solid var(--line);
+  .cart-item:last-child{ border-bottom:none; }
+  .ci-info{ flex-grow:1; }
+  .ci-name{ font-size:0.92rem; font-weight:700; color:#fff; }
+  .ci-price{ font-size:0.8rem; color: var(--ink-soft); margin-top:3px; }
+  .ci-controls{ display:flex; align-items:center; gap:8px; }
+  .qty-btn{
+    width:26px; height:26px; border-radius:6px;
+    background: rgba(157,124,232,0.12);
+    border: 1px solid var(--line-deep);
+    color: var(--ink); cursor:pointer; font-size:0.95rem;
+    display:flex; align-items:center; justify-content:center;
   }
-  .article-body{ padding: 26px 28px; }
-  .article-body h3{
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 6px;
-  }
-  .article-body p{
-    color: var(--ink-soft);
-    font-size: 0.93rem;
-    line-height: 1.8;
+  .qty-btn:hover{ border-color: var(--axis-purple); }
+  .qty-val{ min-width:20px; text-align:center; font-weight:700; font-size:0.9rem; }
+  .ci-remove{
+    background:none; border:none; color:#e88; cursor:pointer; font-size:0.78rem; margin-right:6px;
   }
 
-  .rules-footer{
-    margin-top: 30px;
-    padding: 20px 24px;
-    border-radius: 10px;
-    border: 1px solid rgba(212,175,106,0.3);
-    background: rgba(212,175,106,0.06);
-    font-size: 0.88rem;
-    color: var(--ink-soft);
-    line-height: 1.8;
-  }
-  .rules-footer strong{ color: var(--gold); font-weight: 700; }
-
-  /* ===== FOOTER ===== */
-  .site-footer{
-    text-align:center;
-    padding: 56px 24px 50px;
+  .drawer-foot{
     border-top: 1px solid var(--line);
-    background: var(--navy-deep);
+    padding: 18px 22px 24px;
   }
-  .footer-mark{
+  .total-row{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom: 16px;
+    font-size: 0.98rem;
+  }
+  .total-row span:last-child{ color: var(--gold); font-weight:800; font-size:1.1rem; }
+  .checkout-btn{
+    width:100%;
+    background: linear-gradient(135deg, var(--axis-purple) 0%, #6f52b8 100%);
+    color:#fff; border:none; font-weight:800; font-size:0.95rem;
+    padding: 14px; border-radius:9px; cursor:pointer;
+    box-shadow: 0 8px 30px rgba(157,124,232,0.4);
+  }
+  .checkout-btn:hover{ transform: translateY(-1px); }
+  .checkout-btn:disabled{ opacity:0.5; cursor:not-allowed; }
+
+  /* ===== CHECKOUT MODAL ===== */
+  .modal-overlay{
+    position: fixed; inset:0; background: rgba(3,2,8,0.8);
+    z-index: 80; display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition: opacity 0.3s;
+    padding: 20px;
+  }
+  .modal-overlay.show{ opacity:1; pointer-events:auto; }
+  .modal-box{
+    background: var(--paper-soft);
+    border: 1px solid var(--line-deep);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 400px; width:100%;
+    text-align:center;
+  }
+  .modal-box h3{ font-family: var(--font-display); color:#fff; font-size:1.25rem; margin-bottom:10px; }
+  .modal-box p{ color: var(--ink-soft); font-size:0.88rem; margin-bottom:20px; line-height:1.7; }
+  .modal-input{
+    width:100%;
+    background: var(--paper);
+    border: 1px solid var(--line-deep);
+    color: var(--ink);
+    padding: 12px 16px;
+    border-radius: 9px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    outline:none;
+    text-align:center;
+  }
+  .modal-input:focus{ border-color: var(--axis-purple); }
+  .modal-actions{ display:flex; gap:10px; }
+  .modal-actions button{ flex:1; }
+  .btn-cancel{
+    background: rgba(157,124,232,0.06);
+    color: var(--ink-soft);
+    border: 1px solid var(--line-deep);
+    padding: 12px; border-radius:9px; font-weight:700; cursor:pointer;
+  }
+  .btn-confirm{
+    background: var(--axis-purple); color:#0a0712; border:none;
+    padding: 12px; border-radius:9px; font-weight:800; cursor:pointer;
+  }
+  .btn-confirm:disabled{ opacity:0.5; cursor:not-allowed; }
+
+  .success-icon{ font-size: 2.6rem; margin-bottom: 8px; }
+  .order-num{
     font-family: var(--font-display);
-    font-size: 1.2rem;
-    letter-spacing: 0.15em;
-    color: #fff;
-    margin-bottom: 8px;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin: 14px 0;
   }
-  .site-footer p{ color: rgba(255,255,255,0.55); font-size: 0.82rem; }
 
-  /* ===== Sticky join button ===== */
-  .sticky-join{
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(120%);
-    z-index: 50;
-    transition: transform 0.45s cubic-bezier(.2,.8,.2,1);
+  .spinner{
+    width:18px; height:18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #0a0712;
+    border-radius:50%;
+    display:inline-block;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-left: 8px;
   }
-  .sticky-join.show{ transform: translateX(-50%) translateY(0); }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
 
-  @media (max-width: 720px){
-    section{ padding: 70px 16px; }
-    .stats-grid{ grid-template-columns: 1fr; }
-    .article{ grid-template-columns: 48px 1fr; }
-    .nav-links a:not(.nav-cta){ display:none; }
+  @media (max-width: 640px){
+    .products-grid{ grid-template-columns: 1fr; }
+    section{ padding: 50px 16px 90px; }
+    .nav-links a:not(.nav-cta):not(.cart-btn){ display:none; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -361,229 +388,311 @@
 
 <header class="site-header">
   <div class="nav-inner">
-    <div class="nav-brand">
+    <a href="index.html" class="nav-brand">
       <img src="logo.png" alt="Axis">
       AXIS
-    </div>
+    </a>
     <nav class="nav-links">
-      <a href="#rules">القوانين</a>
+      <a href="index.html#rules">القوانين</a>
+      <a href="shop.html" style="color:var(--axis-purple);">المتجر</a>
+      <button class="cart-btn" id="cartBtn" aria-label="السلة">
+        🛒
+        <span class="cart-count" id="cartCount" style="display:none;">0</span>
+      </button>
       <a href="https://discord.gg/hXSq7nK2ee" target="_blank" class="nav-cta">انضم إلينا</a>
     </nav>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
+<div class="wrap">
+<section>
   <div class="container">
-    <div class="hero-logo-wrap">
-      <img src="logo.png" alt="Axis" class="hero-logo">
+
+    <div class="page-head">
+      <div class="eyebrow" style="justify-content:center;"><span class="dash"></span>المتجر<span class="dash"></span></div>
+      <h1>متجر Axis</h1>
+      <p>رتب وإضافات مميزة تدعم السيرفر، اشتر بالنقاط واستمتع بمزايا حصرية.</p>
     </div>
-    <div class="hero-badge"><span class="dot"></span>سيرفر نشط</div>
-    <h1>AXIS</h1>
-    <p class="hero-tagline">المحور الذي يجمعنا. مجتمع مبني على الاحترام، الالتزام، والانضباط.</p>
-    <div class="hero-actions">
-      <a href="https://discord.gg/hXSq7nK2ee" target="_blank" class="btn btn-primary">
-        انضم إلى السيرفر
-      </a>
-      <a href="#rules" class="btn btn-ghost">اطّلع على القوانين</a>
+
+    <div class="group-title"><span class="eyebrow" style="margin:0;"><span class="dash"></span>الرتب</span></div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-icon">📸</div>
+        <div class="product-name">رول الصور</div>
+        <div class="product-desc">يمكنك إرسال الصور في الشات.</div>
+        <div class="product-foot">
+          <span class="product-price">300 نقطة</span>
+          <button class="add-btn" data-id="photo-role" data-name="رول الصور" data-price="300">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">✨</div>
+        <div class="product-name">كوستم رول</div>
+        <div class="product-desc">إنشاء رتبة خاصة باسمك.</div>
+        <div class="product-foot">
+          <span class="product-price">600 نقطة</span>
+          <button class="add-btn" data-id="custom-role" data-name="كوستم رول" data-price="600">إضافة</button>
+        </div>
+      </div>
     </div>
+
+    <div class="group-title"><span class="eyebrow" style="margin:0;"><span class="dash"></span>إضافات الرول</span></div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-icon">🟣</div>
+        <div class="product-name">إضافة لون واحد</div>
+        <div class="product-desc">إضافة لون واحد لرتبتك الخاصة.</div>
+        <div class="product-foot">
+          <span class="product-price">50 نقطة</span>
+          <button class="add-btn" data-id="one-color" data-name="إضافة لون واحد" data-price="50">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🌈</div>
+        <div class="product-name">إضافة لونين</div>
+        <div class="product-desc">إضافة لونين متدرجين لرتبتك الخاصة.</div>
+        <div class="product-foot">
+          <span class="product-price">100 نقطة</span>
+          <button class="add-btn" data-id="two-colors" data-name="إضافة لونين" data-price="100">إضافة</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-title"><span class="eyebrow" style="margin:0;"><span class="dash"></span>أسعار النقاط</span></div>
+    <div class="price-table">
+      <div class="price-row"><span>100 نقطة</span><span>1.5 ريال</span></div>
+      <div class="price-row"><span>200 نقطة</span><span>3 ريال</span></div>
+      <div class="price-row"><span>300 نقطة</span><span>4.5 ريال</span></div>
+      <div class="price-row"><span>500 نقطة</span><span>7.5 ريال</span></div>
+      <div class="price-row"><span>1000 نقطة</span><span>15 ريال</span></div>
+    </div>
+
   </div>
 </section>
+</div>
 
-<!-- STATS -->
-<section class="stats-section">
-  <div class="container">
-    <div class="eyebrow"><span class="dash"></span>نبض المجتمع</div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-dot"></div>
-        <div class="stat-value" id="memberCount">—</div>
-        <div class="stat-label">عضو</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-dot online"></div>
-        <div class="stat-value" id="onlineCount">—</div>
-        <div class="stat-label">متصل الآن</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-dot"></div>
-        <div class="stat-value" id="serverName">Axis</div>
-        <div class="stat-label">اسم السيرفر</div>
-      </div>
-    </div>
-    <p class="stats-note"> axis </p>
+<!-- CART DRAWER -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h2>سلة المشتريات</h2>
+    <button class="drawer-close" id="drawerClose">✕</button>
   </div>
-</section>
+  <div class="drawer-body" id="drawerBody">
+    <p class="drawer-empty">السلة فاضية</p>
+  </div>
+  <div class="drawer-foot">
+    <div class="total-row"><span>الإجمالي</span><span id="cartTotal">0 نقطة</span></div>
+    <button class="checkout-btn" id="checkoutBtn" disabled>إتمام الشراء</button>
+  </div>
+</div>
 
-<!-- RULES -->
-<section class="rules-section" id="rules">
-  <div class="container">
-    <div class="rules-header">
-      <div class="eyebrow" style="justify-content:center;"><span class="dash"></span>القوانين<span class="dash"></span></div>
-      <h2 class="rules-title">قوانين Axis</h2>
-      <p class="rules-sub">التزامك بها يحافظ على بيئة محترمة لكل الأعضاء</p>
-    </div>
-
-    <div class="charter">
-      <div class="article">
-        <div class="article-num">01</div>
-        <div class="article-body">
-          <h3>الاحترام أولًا</h3>
-          <p>احترام جميع الأعضاء والإدارة واجب على كل من ينضم للسيرفر.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">02</div>
-        <div class="article-body">
-          <h3>منع التنمر والاستفزاز</h3>
-          <p>يمنع التنمر، الإهانة، الاستفزاز أو التقليل من الآخرين بأي شكل.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">03</div>
-        <div class="article-body">
-          <h3>احترام الأديان والمعتقدات</h3>
-          <p>يمنع الإساءة أو السخرية أو الاستفزاز تجاه أي دين أو معتقد. النقاشات الدينية يجب أن تكون باحترام ودون تعصب أو إساءة.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">04</div>
-        <div class="article-body">
-          <h3>احترام الدول والجنسيات</h3>
-          <p>يمنع شتم الدول أو الشعوب أو الجنسيات، ويمنع نشر العنصرية أو التمييز أو إثارة الفتن بين الجنسيات.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">05</div>
-        <div class="article-body">
-          <h3>ممنوع السب والشتم</h3>
-          <p>يمنع استخدام الألفاظ المسيئة أو العنصرية أو الطائفية تحت أي ظرف.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">06</div>
-        <div class="article-body">
-          <h3>عدم نشر المحتوى غير اللائق</h3>
-          <p>يمنع نشر أي محتوى إباحي، دموي، أو غير مناسب داخل السيرفر.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">07</div>
-        <div class="article-body">
-          <h3>ممنوع السبام</h3>
-          <p>يمنع تكرار الرسائل، الإيموجيات بشكل مزعج، أو المنشن العشوائي.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">08</div>
-        <div class="article-body">
-          <h3>الإعلانات ممنوعة</h3>
-          <p>يمنع نشر سيرفرات أو روابط أو حسابات بدون إذن الإدارة.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">09</div>
-        <div class="article-body">
-          <h3>الالتزام بالقنوات</h3>
-          <p>استخدم كل روم للغرض المخصص له فقط.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">10</div>
-        <div class="article-body">
-          <h3>ممنوع إثارة المشاكل</h3>
-          <p>يمنع افتعال المشاكل أو التحريض بين الأعضاء.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">11</div>
-        <div class="article-body">
-          <h3>الحفاظ على الخصوصية</h3>
-          <p>يمنع نشر معلومات شخصية لك أو لغيرك داخل السيرفر.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">12</div>
-        <div class="article-body">
-          <h3>ممنوع انتحال الشخصيات</h3>
-          <p>يمنع تقليد أو انتحال الإدارة أو أي عضو آخر.</p>
-        </div>
-      </div>
-      <div class="article">
-        <div class="article-num">13</div>
-        <div class="article-body">
-          <h3>احترام قرارات الإدارة</h3>
-          <p>إذا عندك اعتراض أو شكوى استخدم التذاكر أو تواصل مع الإدارة باحترام.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="rules-footer">
-      <p>مخالفة هذه القوانين تعرّضك لإجراءات قد تصل إلى <strong>الطرد النهائي</strong> من السيرفر. التزامك يحمي مجتمعنا.</p>
+<!-- CHECKOUT: ASK USERNAME -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal-box">
+    <h3>إتمام الطلب</h3>
+    <p>حط يوزرك في الديسكورد (مثال: <span style="color:#fff;">sal_dev</span>) عشان نوصل طلبك للإدارة.</p>
+    <input type="text" class="modal-input" id="discordUsername" placeholder="يوزرك في الديسكورد">
+    <div class="modal-actions">
+      <button class="btn-cancel" id="checkoutCancel">رجوع</button>
+      <button class="btn-confirm" id="checkoutConfirm">تأكيد الطلب</button>
     </div>
   </div>
-</section>
+</div>
 
-<footer class="site-footer">
-  <div class="footer-mark">AXIS</div>
-  <p>© 2026 Axis. جميع الحقوق محفوظة.</p>
-</footer>
-
-<a href="https://discord.gg/hXSq7nK2ee" target="_blank" class="btn btn-primary sticky-join" id="stickyJoin">
-  انضم إلى السيرفر
-</a>
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal-box">
+    <div class="success-icon">✅</div>
+    <h3>تم استلام طلبك!</h3>
+    <p>راح تتواصل معك الإدارة قريبًا لإتمام عملية الشراء.</p>
+    <div class="order-num" id="orderNumDisplay">#000000</div>
+    <div class="modal-actions">
+      <button class="btn-confirm" id="successClose" style="flex:1;">تمام</button>
+    </div>
+  </div>
+</div>
 
 <script>
-  // Sticky join button appears after hero
-  const stickyJoin = document.getElementById('stickyJoin');
-  const hero = document.querySelector('.hero');
-  window.addEventListener('scroll', () => {
-    const heroBottom = hero.getBoundingClientRect().bottom;
-    if(heroBottom < 0){ stickyJoin.classList.add('show'); }
-    else{ stickyJoin.classList.remove('show'); }
+  const WEBHOOK_URL = 'https://discord.com/api/webhooks/1521249676660314303/oDZZusiOnnm26R322s5rlJIJYjXeaiR4gKFZBaAUzDr9104LTy8vWy2WsOIwhLbmzr9p';
+
+  let cart = {}; // id -> {name, price, qty}
+
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+  const drawerBody = document.getElementById('drawerBody');
+  const cartCount = document.getElementById('cartCount');
+  const cartTotal = document.getElementById('cartTotal');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+
+  function openDrawer(){ drawer.classList.add('show'); overlay.classList.add('show'); }
+  function closeDrawer(){ drawer.classList.remove('show'); overlay.classList.remove('show'); }
+
+  document.getElementById('cartBtn').addEventListener('click', openDrawer);
+  document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const name = btn.dataset.name;
+      const price = parseInt(btn.dataset.price, 10);
+      if(cart[id]){ cart[id].qty += 1; }
+      else{ cart[id] = { name, price, qty: 1 }; }
+      renderCart();
+      openDrawer();
+    });
   });
 
-  // Live Discord stats via public invite API
-  const INVITE_CODE = 'hXSq7nK2ee';
+  function changeQty(id, delta){
+    if(!cart[id]) return;
+    cart[id].qty += delta;
+    if(cart[id].qty <= 0){ delete cart[id]; }
+    renderCart();
+  }
 
-  async function loadDiscordStats(){
-    try{
-      const res = await fetch(`https://discord.com/api/v10/invites/${INVITE_CODE}?with_counts=true&with_expiration=true`);
-      if(!res.ok) throw new Error('invite fetch failed');
-      const data = await res.json();
+  function removeItem(id){
+    delete cart[id];
+    renderCart();
+  }
 
-      const memberCount = data.approximate_member_count;
-      const onlineCount = data.approximate_presence_count;
-      const guildName = data.guild && data.guild.name ? data.guild.name : 'Axis';
+  function renderCart(){
+    const ids = Object.keys(cart);
+    let totalCount = 0;
+    let totalPrice = 0;
 
-      animateCount(document.getElementById('memberCount'), memberCount);
-      animateCount(document.getElementById('onlineCount'), onlineCount);
-      document.getElementById('serverName').textContent = guildName;
+    if(ids.length === 0){
+      drawerBody.innerHTML = '<p class="drawer-empty">السلة فاضية</p>';
+      checkoutBtn.disabled = true;
+    } else {
+      drawerBody.innerHTML = ids.map(id => {
+        const item = cart[id];
+        totalCount += item.qty;
+        totalPrice += item.qty * item.price;
+        return `
+          <div class="cart-item">
+            <div class="ci-info">
+              <div class="ci-name">${item.name}</div>
+              <div class="ci-price">${item.price} نقطة × ${item.qty} = ${item.price * item.qty} نقطة</div>
+            </div>
+            <div class="ci-controls">
+              <button class="qty-btn" onclick="changeQty('${id}', -1)">−</button>
+              <span class="qty-val">${item.qty}</span>
+              <button class="qty-btn" onclick="changeQty('${id}', 1)">+</button>
+              <button class="ci-remove" onclick="removeItem('${id}')">حذف</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+      checkoutBtn.disabled = false;
+    }
 
-    }catch(err){
-      document.getElementById('memberCount').textContent = '—';
-      document.getElementById('onlineCount').textContent = '—';
-      console.warn('Could not load Discord stats:', err);
+    ids.forEach(id => { /* recompute already done above */ });
+
+    if(ids.length > 0){
+      totalCount = 0; totalPrice = 0;
+      ids.forEach(id => { totalCount += cart[id].qty; totalPrice += cart[id].qty * cart[id].price; });
+    }
+
+    cartTotal.textContent = totalPrice + ' نقطة';
+    if(totalCount > 0){
+      cartCount.style.display = 'flex';
+      cartCount.textContent = totalCount;
+    } else {
+      cartCount.style.display = 'none';
     }
   }
 
-  function animateCount(el, target){
-    if(target == null){ el.textContent = '—'; return; }
-    let current = 0;
-    const steps = 40;
-    const increment = target / steps;
-    const interval = setInterval(() => {
-      current += increment;
-      if(current >= target){
-        el.textContent = target.toLocaleString('en-US');
-        clearInterval(interval);
-      } else {
-        el.textContent = Math.floor(current).toLocaleString('en-US');
-      }
-    }, 25);
+  // ===== CHECKOUT FLOW =====
+  const checkoutModal = document.getElementById('checkoutModal');
+  const successModal = document.getElementById('successModal');
+  const discordUsernameInput = document.getElementById('discordUsername');
+  const checkoutConfirmBtn = document.getElementById('checkoutConfirm');
+
+  checkoutBtn.addEventListener('click', () => {
+    closeDrawer();
+    discordUsernameInput.value = '';
+    checkoutModal.classList.add('show');
+  });
+
+  document.getElementById('checkoutCancel').addEventListener('click', () => {
+    checkoutModal.classList.remove('show');
+  });
+
+  function pointsToRiyal(points){
+    return (points * 0.015).toFixed(2);
   }
 
-  loadDiscordStats();
+  function generateOrderNumber(){
+    return Math.floor(100000 + Math.random() * 900000).toString();
+  }
+
+  checkoutConfirmBtn.addEventListener('click', async () => {
+    const username = discordUsernameInput.value.trim();
+    if(!username){
+      discordUsernameInput.style.borderColor = '#e88';
+      discordUsernameInput.placeholder = 'لازم تكتب يوزرك أولاً!';
+      return;
+    }
+
+    const ids = Object.keys(cart);
+    if(ids.length === 0) return;
+
+    let totalPoints = 0;
+    const lines = ids.map(id => {
+      const item = cart[id];
+      totalPoints += item.qty * item.price;
+      return `**${item.name}** × ${item.qty} — ${item.qty * item.price} نقطة`;
+    });
+
+    const orderNumber = generateOrderNumber();
+    const riyalValue = pointsToRiyal(totalPoints);
+
+    checkoutConfirmBtn.disabled = true;
+    checkoutConfirmBtn.innerHTML = 'جاري الإرسال<span class="spinner"></span>';
+
+    const payload = {
+      content: `📦 طلب شراء جديد من **${username}**`,
+      embeds: [{
+        title: `🛒 طلب جديد — رقم #${orderNumber}`,
+        color: 0x9d7ce8,
+        fields: [
+          { name: '👤 المستخدم', value: username, inline: true },
+          { name: '🔖 رقم الطلب', value: `#${orderNumber}`, inline: true },
+          { name: '📋 المنتجات', value: lines.join('\n') },
+          { name: '💰 الإجمالي', value: `${totalPoints} نقطة (≈ ${riyalValue} ريال)` }
+        ],
+        footer: { text: 'Axis Shop' },
+        timestamp: new Date().toISOString()
+      }]
+    };
+
+    try{
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch(err){
+      console.warn('Webhook send failed:', err);
+    }
+
+    checkoutConfirmBtn.disabled = false;
+    checkoutConfirmBtn.textContent = 'تأكيد الطلب';
+    checkoutModal.classList.remove('show');
+
+    document.getElementById('orderNumDisplay').textContent = '#' + orderNumber;
+    successModal.classList.add('show');
+
+    cart = {};
+    renderCart();
+  });
+
+  document.getElementById('successClose').addEventListener('click', () => {
+    successModal.classList.remove('show');
+  });
+
+  renderCart();
 </script>
 
 </body>
