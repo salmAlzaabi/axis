@@ -686,19 +686,15 @@
 
     let totalRiyal = 0;
     let totalPoints = 0;
-    const riyalLines = [];
-    const pointsLines = [];
+    const lines = [];
 
     ids.forEach(id => {
       const item = cart[id];
       const lineTotal = item.qty * item.price;
-      if(item.type === 'riyal'){
-        totalRiyal += lineTotal;
-        riyalLines.push(`**${item.name}** × ${item.qty} — ${lineTotal} ريال`);
-      } else {
-        totalPoints += lineTotal;
-        pointsLines.push(`**${item.name}** × ${item.qty} — ${lineTotal} نقطة`);
-      }
+      const unit = item.type === 'riyal' ? 'ريال' : 'نقطة';
+      if(item.type === 'riyal'){ totalRiyal += lineTotal; }
+      else{ totalPoints += lineTotal; }
+      lines.push(`${item.name} ×${item.qty} — ${lineTotal} ${unit}`);
     });
 
     const orderNumber = generateOrderNumber();
@@ -706,30 +702,15 @@
     checkoutConfirmBtn.disabled = true;
     checkoutConfirmBtn.innerHTML = 'جاري الإرسال<span class="spinner"></span>';
 
-    const fields = [
-      { name: '👤 المستخدم', value: username, inline: true },
-      { name: '🔖 رقم الطلب', value: `#${orderNumber}`, inline: true }
-    ];
-
-    if(riyalLines.length){
-      fields.push({ name: '💵 شحن نقاط (يدفع ريال)', value: riyalLines.join('\n') });
-    }
-    if(pointsLines.length){
-      fields.push({ name: '🎭 منتجات (تخصم من النقاط)', value: pointsLines.join('\n') });
-    }
-
-    const summaryParts = [];
-    if(totalRiyal > 0) summaryParts.push(`💵 ${totalRiyal.toFixed(2).replace(/\.00$/, '')} ريال (دفع)`);
-    if(totalPoints > 0) summaryParts.push(`🎭 ${totalPoints} نقطة (خصم من الرصيد)`);
-    fields.push({ name: '💰 الإجمالي', value: summaryParts.join(' + ') });
+    const totalParts = [];
+    if(totalRiyal > 0) totalParts.push(totalRiyal.toFixed(2).replace(/\.00$/, '') + ' ريال');
+    if(totalPoints > 0) totalParts.push(totalPoints + ' نقطة');
 
     const payload = {
-      content: `📦 طلب شراء جديد من **${username}**`,
       embeds: [{
-        title: `🛒 طلب جديد — رقم #${orderNumber}`,
+        title: `طلب #${orderNumber}`,
         color: 0x9d7ce8,
-        fields: fields,
-        footer: { text: 'Axis Shop' },
+        description: `**${username}**\n\n${lines.join('\n')}\n\n**الإجمالي:** ${totalParts.join(' + ')}`,
         timestamp: new Date().toISOString()
       }]
     };
