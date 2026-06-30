@@ -706,18 +706,19 @@
     if(totalRiyal > 0) totalParts.push(totalRiyal.toFixed(2).replace(/\.00$/, '') + ' ريال');
     if(totalPoints > 0) totalParts.push(totalPoints + ' نقطة');
 
-    const payload = {
-      embeds: [{
-        title: `📌 طلب جديد | (رقم الطلب ${orderNumber})`,
-        color: 0x9d7ce8,
-        fields: [
-          { name: '👤 العميل', value: `@${username}` },
-          { name: '🛒 المنتجات', value: lines.join('\n') },
-          { name: '💰 اجمالي المبلغ', value: totalParts.join(' + ') }
-        ],
-        timestamp: new Date().toISOString()
-      }]
-    };
+const payload = {
+  "content": "<@1195827812565798953>، وصل طلب جديد عبر المتجر!", 
+  embeds: [{
+    title: `📌 طلب جديد | (رقم الطلب ${orderNumber})`,
+    color: 0x9d7ce8,
+    fields: [
+      { name: '👤 العميل', value: `@${username}` },
+      { name: '🛒 المنتجات', value: lines.join('\n') },
+      { name: '💰 اجمالي المبلغ', value: totalParts.join(' + ') }
+    ],
+    timestamp: new Date().toISOString()
+  }]
+};
 
     try{
       await fetch(WEBHOOK_URL, {
