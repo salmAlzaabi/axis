@@ -35,7 +35,6 @@
     position: relative;
   }
 
-  /* ===== Ambient background ===== */
   .bg-field{
     position: fixed;
     inset: 0;
@@ -76,7 +75,6 @@
   }
   .eyebrow .dash{ width: 26px; height:2px; background: var(--axis-purple); border-radius: 2px; }
 
-  /* ===== HEADER / NAV ===== */
   .site-header{
     position: sticky; top:0; z-index: 40;
     background: rgba(7,5,13,0.85);
@@ -114,7 +112,6 @@
   }
   .nav-cta:hover{ background: var(--axis-purple-deep) !important; color: #fff !important; }
 
-  /* ===== Mobile menu ===== */
   .menu-toggle{
     display:none;
     background: rgba(157,124,232,0.1);
@@ -163,7 +160,6 @@
     border-top:none;
   }
 
-  /* ===== HERO ===== */
   .hero{
     padding: 90px 24px 80px;
     text-align:center;
@@ -256,7 +252,6 @@
   }
   .btn-ghost:hover{ border-color: var(--axis-purple); background: rgba(157,124,232,0.12); }
 
-  /* ===== STATS ===== */
   .stats-section{ padding-top: 64px; padding-bottom: 64px; background: transparent; }
   .stats-grid{
     display:grid;
@@ -299,7 +294,6 @@
     color: var(--ink-soft);
   }
 
-  /* ===== RULES — formal charter / numbered articles ===== */
   .rules-section{ padding-top: 64px; background: transparent; border-top: 1px solid var(--line); }
   .rules-header{ text-align:center; margin-bottom: 50px; }
   .rules-title{
@@ -364,7 +358,6 @@
   }
   .rules-footer strong{ color: var(--gold); font-weight: 700; }
 
-  /* ===== FOOTER ===== */
   .site-footer{
     text-align:center;
     padding: 56px 24px 50px;
@@ -380,7 +373,6 @@
   }
   .site-footer p{ color: rgba(255,255,255,0.55); font-size: 0.82rem; }
 
-  /* ===== Sticky join button ===== */
   .sticky-join{
     position: fixed;
     bottom: 24px;
@@ -431,7 +423,6 @@
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div class="container">
     <div class="hero-logo-wrap">
@@ -448,7 +439,6 @@
   </div>
 </section>
 
-<!-- STATS -->
 <section class="stats-section">
   <div class="container">
     <div class="eyebrow"><span class="dash"></span>نبض المجتمع</div>
@@ -473,7 +463,6 @@
   </div>
 </section>
 
-<!-- RULES -->
 <section class="rules-section" id="rules">
   <div class="container">
     <div class="rules-header">
@@ -592,7 +581,6 @@
 </a>
 
 <script>
-  // Mobile menu toggle
   const menuToggle = document.getElementById('menuToggle');
   const mobileDropdown = document.getElementById('mobileDropdown');
   menuToggle.addEventListener('click', () => {
@@ -606,7 +594,6 @@
     });
   });
 
-  // Sticky join button appears after hero
   const stickyJoin = document.getElementById('stickyJoin');
   const hero = document.querySelector('.hero');
   window.addEventListener('scroll', () => {
@@ -615,7 +602,6 @@
     else{ stickyJoin.classList.remove('show'); }
   });
 
-  // Live Discord stats via public invite API
   const INVITE_CODE = 'rYnkYME9xj';
 
   async function loadDiscordStats(){
