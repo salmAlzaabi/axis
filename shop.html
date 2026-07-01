@@ -184,6 +184,7 @@
   .product-card:hover{ border-color: var(--line-deep); }
 
   .product-icon{ font-size: 1.8rem; }
+  .product-icon img{ width: 32px; height: 32px; display:block; object-fit: contain; }
   .product-name{ font-weight: 700; font-size: 1.05rem; color: #fff; }
   .product-desc{ color: var(--ink-soft); font-size: 0.86rem; line-height: 1.7; flex-grow:1; }
   .product-foot{
@@ -329,6 +330,24 @@
     text-align:center;
   }
   .modal-input:focus{ border-color: var(--axis-purple); }
+  .extra-fields{ display:none; }
+  .extra-fields.show{ display:block; }
+  .contact-toggle{
+    display:flex; gap:10px; margin-bottom:16px;
+  }
+  .contact-toggle label{
+    flex:1;
+    background: var(--paper);
+    border: 1px solid var(--line-deep);
+    border-radius: 9px;
+    padding: 10px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+  }
+  .contact-toggle input{ accent-color: var(--axis-purple); }
+  .contact-toggle label.active{ border-color: var(--axis-purple); color:#fff; }
   .modal-actions{ display:flex; gap:10px; }
   .modal-actions button{ flex:1; }
   .btn-cancel{
@@ -501,6 +520,128 @@
       </div>
     </div>
 
+    <div class="group-title"><span class="eyebrow" style="margin:0;"><span class="dash"></span>شحن نقاط ومنتجات (M)</span></div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-icon"><img src="https://cdn.simpleicons.org/razer/00FF00" alt="Razer" onerror="this.outerHTML='🎮'"></div>
+        <div class="product-name">ريزر قولد 10$</div>
+        <div class="product-desc">بطاقة ريزر قولد فئة 10 دولار.</div>
+        <div class="product-foot">
+          <span class="product-price">350 M</span>
+          <button class="add-btn" data-type="m" data-id="razer-gold-10" data-extra="1" data-name="ريزر قولد 10$" data-price="350">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon"><img src="https://cdn.simpleicons.org/itunes/FB5BC5" alt="iTunes" onerror="this.outerHTML='🍎'"></div>
+        <div class="product-name">آيتونز 10$</div>
+        <div class="product-desc">بطاقة آيتونز فئة 10 دولار.</div>
+        <div class="product-foot">
+          <span class="product-price">250 M</span>
+          <button class="add-btn" data-type="m" data-id="itunes-10" data-extra="1" data-name="آيتونز 10$" data-price="250">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">📶</div>
+        <div class="product-name">رصيد سوا 20</div>
+        <div class="product-desc">شحن رصيد سوا فئة 20.</div>
+        <div class="product-foot">
+          <span class="product-price">180 M</span>
+          <button class="add-btn" data-type="m" data-id="sawa-20" data-extra="1" data-name="رصيد سوا 20" data-price="180">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🛍️</div>
+        <div class="product-name">رصيد ستور 10$</div>
+        <div class="product-desc">شحن رصيد ستور فئة 10 دولار.</div>
+        <div class="product-foot">
+          <span class="product-price">250 M</span>
+          <button class="add-btn" data-type="m" data-id="store-10" data-extra="1" data-name="رصيد ستور 10$" data-price="250">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">💳</div>
+        <div class="product-name">لايك كارد 20</div>
+        <div class="product-desc">بطاقة لايك فئة 20.</div>
+        <div class="product-foot">
+          <span class="product-price">180 M</span>
+          <button class="add-btn" data-type="m" data-id="like-card-20" data-extra="1" data-name="لايك كارد 20" data-price="180">إضافة</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-title"><span class="eyebrow" style="margin:0;"><span class="dash"></span>حسابات نتفليكس (فل أكسس)</span></div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-icon"><img src="https://cdn.simpleicons.org/netflix/E50914" alt="Netflix" onerror="this.outerHTML='🎬'"></div>
+        <div class="product-name">نتفليكس شهر</div>
+        <div class="product-desc">5 بروفايلات كاملة، باقة 4K، الحساب بايميلك وباسوردك الشخصي، ضمان المدة كاملة.</div>
+        <div class="product-foot">
+          <span class="product-price">100 M</span>
+          <button class="add-btn" data-type="m" data-id="netflix-month" data-extra="1" data-name="نتفليكس شهر" data-price="100">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon"><img src="https://cdn.simpleicons.org/netflix/E50914" alt="Netflix" onerror="this.outerHTML='🎬'"></div>
+        <div class="product-name">نتفليكس 6 شهور</div>
+        <div class="product-desc">5 بروفايلات كاملة، باقة 4K، الحساب بايميلك وباسوردك الشخصي، ضمان المدة كاملة.</div>
+        <div class="product-foot">
+          <span class="product-price">150 M</span>
+          <button class="add-btn" data-type="m" data-id="netflix-6month" data-extra="1" data-name="نتفليكس 6 شهور" data-price="150">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon"><img src="https://cdn.simpleicons.org/netflix/E50914" alt="Netflix" onerror="this.outerHTML='🎬'"></div>
+        <div class="product-name">نتفليكس سنة</div>
+        <div class="product-desc">5 بروفايلات كاملة، باقة 4K، الحساب بايميلك وباسوردك الشخصي، ضمان المدة كاملة.</div>
+        <div class="product-foot">
+          <span class="product-price">200 M</span>
+          <button class="add-btn" data-type="m" data-id="netflix-year" data-extra="1" data-name="نتفليكس سنة" data-price="200">إضافة</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-title"><span class="eyebrow" style="margin:0;"><span class="dash"></span>نيتروهات ديسكورد</span></div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-icon"><img src="https://cdn.simpleicons.org/discord/5865F2" alt="Discord Nitro" onerror="this.outerHTML='⚡'"></div>
+        <div class="product-name">نيترو قيمنق شهر</div>
+        <div class="product-desc">اشتراك نيترو قيمنق لمدة شهر.</div>
+        <div class="product-foot">
+          <span class="product-price">20 ريال</span>
+          <button class="add-btn" data-type="riyal" data-id="nitro-gaming-month" data-extra="1" data-name="نيترو قيمنق شهر" data-price="20">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon"><img src="https://cdn.simpleicons.org/discord/5865F2" alt="Discord Nitro" onerror="this.outerHTML='⚡'"></div>
+        <div class="product-name">نيترو قيمنق سنة</div>
+        <div class="product-desc">اشتراك نيترو قيمنق لمدة سنة.</div>
+        <div class="product-foot">
+          <span class="product-price">170 ريال</span>
+          <button class="add-btn" data-type="riyal" data-id="nitro-gaming-year" data-extra="1" data-name="نيترو قيمنق سنة" data-price="170">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon"><img src="https://cdn.simpleicons.org/discord/5865F2" alt="Discord Nitro" onerror="this.outerHTML='⚡'"></div>
+        <div class="product-name">نيترو بيزك شهر</div>
+        <div class="product-desc">اشتراك نيترو بيزك لمدة شهر.</div>
+        <div class="product-foot">
+          <span class="product-price">10 ريال</span>
+          <button class="add-btn" data-type="riyal" data-id="nitro-basic-month" data-extra="1" data-name="نيترو بيزك شهر" data-price="10">إضافة</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon"><img src="https://cdn.simpleicons.org/discord/5865F2" alt="Discord Nitro" onerror="this.outerHTML='⚡'"></div>
+        <div class="product-name">نيترو بيزك سنة</div>
+        <div class="product-desc">اشتراك نيترو بيزك لمدة سنة.</div>
+        <div class="product-foot">
+          <span class="product-price">75 ريال</span>
+          <button class="add-btn" data-type="riyal" data-id="nitro-basic-year" data-extra="1" data-name="نيترو بيزك سنة" data-price="75">إضافة</button>
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align:center; color:var(--ink-soft); font-size:0.85rem; margin-top:28px;">الأسعار قابلة للتغير ونقبل أغلب طرق الدفع</p>
+
   </div>
 </section>
 </div>
@@ -525,6 +666,14 @@
     <h3>إتمام الطلب</h3>
     <p>حط يوزرك في الديسكورد (مثال: <span style="color:#fff;">sal_dev</span>) عشان نوصل طلبك للإدارة.</p>
     <input type="text" class="modal-input" id="discordUsername" placeholder="يوزرك في الديسكورد">
+    <div class="extra-fields" id="extraFields">
+      <input type="text" class="modal-input" id="discordId" placeholder="آيدي الديسكورد (Discord ID)">
+      <div class="contact-toggle">
+        <label id="labelEmail"><input type="radio" name="contactMethod" value="email" checked>إيميل</label>
+        <label id="labelPhone"><input type="radio" name="contactMethod" value="phone">رقم الجوال</label>
+      </div>
+      <input type="text" class="modal-input" id="contactValue" placeholder="اكتب إيميلك">
+    </div>
     <div class="modal-actions">
       <button class="btn-cancel" id="checkoutCancel">رجوع</button>
       <button class="btn-confirm" id="checkoutConfirm">تأكيد الطلب</button>
@@ -568,9 +717,10 @@
       const id = btn.dataset.id;
       const name = btn.dataset.name;
       const price = parseFloat(btn.dataset.price);
-      const type = btn.dataset.type === 'riyal' ? 'riyal' : 'points';
+      const type = btn.dataset.type;
+      const extra = btn.dataset.extra === '1';
       if(cart[id]){ cart[id].qty += 1; }
-      else{ cart[id] = { name, price, qty: 1, type }; }
+      else{ cart[id] = { name, price, qty: 1, type, extra }; }
       renderCart();
       openDrawer();
     });
@@ -588,7 +738,11 @@
     renderCart();
   }
 
-  function unitLabel(type){ return type === 'riyal' ? 'ريال' : 'نقطة'; }
+  function unitLabel(type){
+    if(type === 'riyal') return 'ريال';
+    if(type === 'm') return 'M';
+    return 'نقطة';
+  }
 
   function renderCart(){
     const ids = Object.keys(cart);
@@ -623,17 +777,20 @@
 
     let totalRiyal = 0;
     let totalPoints = 0;
+    let totalM = 0;
     totalCount = 0;
     ids.forEach(id => {
       const item = cart[id];
       totalCount += item.qty;
       if(item.type === 'riyal'){ totalRiyal += item.qty * item.price; }
+      else if(item.type === 'm'){ totalM += item.qty * item.price; }
       else{ totalPoints += item.qty * item.price; }
     });
 
     const totalParts = [];
     if(totalRiyal > 0) totalParts.push(totalRiyal.toFixed(2).replace(/\.00$/, '') + ' ريال');
     if(totalPoints > 0) totalParts.push(totalPoints + ' نقطة');
+    if(totalM > 0) totalParts.push(totalM + ' M');
     cartTotal.textContent = totalParts.length ? totalParts.join(' + ') : '0';
 
     if(totalCount > 0){
@@ -648,10 +805,46 @@
   const successModal = document.getElementById('successModal');
   const discordUsernameInput = document.getElementById('discordUsername');
   const checkoutConfirmBtn = document.getElementById('checkoutConfirm');
+  const extraFields = document.getElementById('extraFields');
+  const discordIdInput = document.getElementById('discordId');
+  const contactValueInput = document.getElementById('contactValue');
+  const labelEmail = document.getElementById('labelEmail');
+  const labelPhone = document.getElementById('labelPhone');
+
+  function updateContactToggle(){
+    const method = document.querySelector('input[name="contactMethod"]:checked').value;
+    if(method === 'email'){
+      labelEmail.classList.add('active');
+      labelPhone.classList.remove('active');
+      contactValueInput.placeholder = 'اكتب إيميلك';
+    } else {
+      labelPhone.classList.add('active');
+      labelEmail.classList.remove('active');
+      contactValueInput.placeholder = 'اكتب رقم جوالك';
+    }
+  }
+  document.querySelectorAll('input[name="contactMethod"]').forEach(radio => {
+    radio.addEventListener('change', updateContactToggle);
+  });
+  updateContactToggle();
+
+  function cartNeedsExtra(){
+    return Object.values(cart).some(item => item.extra);
+  }
 
   checkoutBtn.addEventListener('click', () => {
     closeDrawer();
     discordUsernameInput.value = '';
+    discordUsernameInput.style.borderColor = '';
+    discordIdInput.value = '';
+    discordIdInput.style.borderColor = '';
+    contactValueInput.value = '';
+    contactValueInput.style.borderColor = '';
+    if(cartNeedsExtra()){
+      extraFields.classList.add('show');
+    } else {
+      extraFields.classList.remove('show');
+    }
     checkoutModal.classList.add('show');
   });
 
@@ -671,18 +864,37 @@
       return;
     }
 
+    const needsExtra = cartNeedsExtra();
+    const discordId = discordIdInput.value.trim();
+    const contactValue = contactValueInput.value.trim();
+    const contactMethod = document.querySelector('input[name="contactMethod"]:checked').value;
+
+    if(needsExtra){
+      if(!discordId){
+        discordIdInput.style.borderColor = '#e88';
+        discordIdInput.placeholder = 'لازم تكتب آيدي الديسكورد!';
+        return;
+      }
+      if(!contactValue){
+        contactValueInput.style.borderColor = '#e88';
+        return;
+      }
+    }
+
     const ids = Object.keys(cart);
     if(ids.length === 0) return;
 
     let totalRiyal = 0;
     let totalPoints = 0;
+    let totalM = 0;
     const lines = [];
 
     ids.forEach(id => {
       const item = cart[id];
       const lineTotal = item.qty * item.price;
-      const unit = item.type === 'riyal' ? 'ريال' : 'نقطة';
+      const unit = unitLabel(item.type);
       if(item.type === 'riyal'){ totalRiyal += lineTotal; }
+      else if(item.type === 'm'){ totalM += lineTotal; }
       else{ totalPoints += lineTotal; }
       lines.push(`${item.name} ×${item.qty} — ${lineTotal} ${unit}`);
     });
@@ -695,17 +907,25 @@
     const totalParts = [];
     if(totalRiyal > 0) totalParts.push(totalRiyal.toFixed(2).replace(/\.00$/, '') + ' ريال');
     if(totalPoints > 0) totalParts.push(totalPoints + ' نقطة');
+    if(totalM > 0) totalParts.push(totalM + ' M');
+
+    const fields = [
+      { name: '👤 العميل', value: `@${username}` },
+      { name: '🛒 المنتجات', value: lines.join('\n') },
+      { name: '💰 اجمالي المبلغ', value: totalParts.join(' + ') }
+    ];
+
+    if(needsExtra){
+      fields.push({ name: '🆔 آيدي الديسكورد', value: discordId });
+      fields.push({ name: contactMethod === 'email' ? '📧 الإيميل' : '📱 رقم الجوال', value: contactValue });
+    }
 
 const payload = {
   "content": "<@1195827812565798953>، وصل طلب جديد عبر المتجر!", 
   embeds: [{
     title: `📌 طلب جديد | (رقم الطلب ${orderNumber})`,
     color: 0x9d7ce8,
-    fields: [
-      { name: '👤 العميل', value: `@${username}` },
-      { name: '🛒 المنتجات', value: lines.join('\n') },
-      { name: '💰 اجمالي المبلغ', value: totalParts.join(' + ') }
-    ],
+    fields: fields,
     timestamp: new Date().toISOString()
   }]
 };
