@@ -75,7 +75,6 @@
   }
   .eyebrow .dash{ width: 26px; height:2px; background: var(--axis-purple); border-radius: 2px; }
 
-  /* HEADER */
   .site-header{
     position: sticky; top:0; z-index: 40;
     background: rgba(7,5,13,0.85);
@@ -138,7 +137,6 @@
     padding: 0 4px;
   }
 
-  /* PAGE HEADER */
   .page-head{ text-align:center; padding-top: 50px; margin-bottom: 50px; }
   .page-head h1{
     font-family: var(--font-display);
@@ -157,7 +155,6 @@
     line-height: 1.8;
   }
 
-  /* SECTIONS */
   .group-title{
     display:flex; align-items:center; gap:10px;
     font-family: var(--font-display);
@@ -210,7 +207,6 @@
   .add-btn:hover{ background: var(--axis-purple-deep); color:#fff; }
   .add-btn:active{ transform: scale(0.96); }
 
-  /* PRICE TABLE */
   .price-table{
     border: 1px solid var(--line);
     border-radius: 14px;
@@ -227,7 +223,6 @@
   .price-row span:first-child{ color: var(--ink-soft); }
   .price-row span:last-child{ color: var(--gold); font-weight: 700; }
 
-  /* ===== CART DRAWER ===== */
   .overlay{
     position: fixed; inset:0; background: rgba(3,2,8,0.7);
     z-index: 60; opacity:0; pointer-events:none; transition: opacity 0.3s;
@@ -303,7 +298,6 @@
   .checkout-btn:hover{ transform: translateY(-1px); }
   .checkout-btn:disabled{ opacity:0.5; cursor:not-allowed; }
 
-  /* ===== CHECKOUT MODAL ===== */
   .modal-overlay{
     position: fixed; inset:0; background: rgba(3,2,8,0.8);
     z-index: 80; display:flex; align-items:center; justify-content:center;
@@ -399,7 +393,7 @@
         🛒
         <span class="cart-count" id="cartCount" style="display:none;">0</span>
       </button>
-      <a href="https://discord.gg/hXSq7nK2ee" target="_blank" class="nav-cta">انضم إلينا</a>
+      <a href="https://discord.gg/rYnkYME9xj" target="_blank" class="nav-cta">انضم إلينا</a>
     </nav>
   </div>
 </header>
@@ -511,7 +505,6 @@
 </section>
 </div>
 
-<!-- CART DRAWER -->
 <div class="overlay" id="overlay"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-head">
@@ -527,7 +520,6 @@
   </div>
 </div>
 
-<!-- CHECKOUT: ASK USERNAME -->
 <div class="modal-overlay" id="checkoutModal">
   <div class="modal-box">
     <h3>إتمام الطلب</h3>
@@ -540,7 +532,6 @@
   </div>
 </div>
 
-<!-- SUCCESS MODAL -->
 <div class="modal-overlay" id="successModal">
   <div class="modal-box">
     <div class="success-icon">✅</div>
@@ -556,7 +547,7 @@
 <script>
   const WEBHOOK_URL = 'https://discord.com/api/webhooks/1521249676660314303/oDZZusiOnnm26R322s5rlJIJYjXeaiR4gKFZBaAUzDr9104LTy8vWy2WsOIwhLbmzr9p';
 
-  let cart = {}; // id -> {name, price, qty}
+  let cart = {};
 
   const drawer = document.getElementById('drawer');
   const overlay = document.getElementById('overlay');
@@ -577,7 +568,7 @@
       const id = btn.dataset.id;
       const name = btn.dataset.name;
       const price = parseFloat(btn.dataset.price);
-      const type = btn.dataset.type === 'riyal' ? 'riyal' : 'points'; // 'riyal' = شحن نقاط (يدفع ريال) | 'points' = منتج يشترى بالنقاط
+      const type = btn.dataset.type === 'riyal' ? 'riyal' : 'points';
       if(cart[id]){ cart[id].qty += 1; }
       else{ cart[id] = { name, price, qty: 1, type }; }
       renderCart();
@@ -653,7 +644,6 @@
     }
   }
 
-  // ===== CHECKOUT FLOW =====
   const checkoutModal = document.getElementById('checkoutModal');
   const successModal = document.getElementById('successModal');
   const discordUsernameInput = document.getElementById('discordUsername');
