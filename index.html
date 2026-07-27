@@ -477,7 +477,7 @@
     pulse.id = `pulse-${server.id}`;
     const onlineText = document.createElement('span');
     onlineText.id = `online-${server.id}`;
-    onlineText.innerHTML = '<b>—</b> متصل';
+    onlineText.innerHTML = '<b>—</b> Online';
     onlineStat.append(pulse, onlineText);
 
     const memberStat = document.createElement('span');
@@ -568,7 +568,7 @@
         }
 
         const onlineEl = document.getElementById(`online-${server.id}`);
-        if (onlineEl) onlineEl.innerHTML = `<b>${formatNumber(online)}</b> متصل`;
+        if (onlineEl) onlineEl.innerHTML = `<b>${formatNumber(online)}</b> Online`;
 
         const membersEl = document.getElementById(`members-${server.id}`);
         if (membersEl) membersEl.innerHTML = `<b>${formatNumber(members)}</b> Members`;
