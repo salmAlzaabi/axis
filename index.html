@@ -483,7 +483,7 @@
     const memberStat = document.createElement('span');
     memberStat.className = 'stat';
     memberStat.id = `members-${server.id}`;
-    memberStat.innerHTML = '<b>—</b> عضو';
+    memberStat.innerHTML = '<b>—</b> Members';
 
     stats.append(onlineStat, memberStat);
 
@@ -571,7 +571,7 @@
         if (onlineEl) onlineEl.innerHTML = `<b>${formatNumber(online)}</b> متصل`;
 
         const membersEl = document.getElementById(`members-${server.id}`);
-        if (membersEl) membersEl.innerHTML = `<b>${formatNumber(members)}</b> عضو`;
+        if (membersEl) membersEl.innerHTML = `<b>${formatNumber(members)}</b> Members`;
 
         const pulseEl = document.getElementById(`pulse-${server.id}`);
         if (pulseEl && online) pulseEl.classList.remove('off');
