@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HmM</title>
+<meta name="description" content="HmM Network — Specialized in Discord Servers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #07050d;
+    --bg-deep: #030208;
+    --paper: #100c19;
+    --paper-soft: #16111f;
+    --violet: #9d7ce8;
+    --violet-bright: #c9b8f0;
+    --violet-deep: #4a3a78;
+    --line: rgba(157,124,232,0.16);
+    --line-deep: rgba(157,124,232,0.32);
+    --ink: #e8e2f5;
+    --ink-soft: #a89bc4;
+    --green: #5ee8a0;
+    --font-display: 'Almarai', sans-serif;
+    --font-body: 'Tajawal', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  .bg-field{
+    position:fixed; inset:0; z-index:0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(157,124,232,0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 90%, rgba(157,124,232,0.07), transparent 60%),
+      var(--bg-deep);
+  }
+  .bg-dust{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(232,226,245,0.45), transparent),
+      radial-gradient(1px 1px at 70% 60%, rgba(232,226,245,0.35), transparent),
+      radial-gradient(1px 1px at 40% 80%, rgba(232,226,245,0.4), transparent),
+      radial-gradient(1px 1px at 85% 20%, rgba(232,226,245,0.35), transparent),
+      radial-gradient(1px 1px at 10% 65%, rgba(232,226,245,0.3), transparent),
+      radial-gradient(1px 1px at 55% 15%, rgba(232,226,245,0.35), transparent),
+      radial-gradient(1px 1px at 92% 75%, rgba(232,226,245,0.3), transparent);
+    background-size:100% 100%;
+  }
+  .wrap{ position:relative; z-index:1; }
+
+  section{ padding: 96px 24px; position:relative; }
+  .container{ max-width: 1040px; margin:0 auto; }
+
+  .eyebrow{
+    font-size:.78rem; font-weight:700; letter-spacing:.22em;
+    color: var(--violet-bright); text-transform:uppercase;
+    display:inline-flex; align-items:center; gap:12px; margin-bottom:24px;
+  }
+  .eyebrow .dash{ width:26px; height:2px; background:var(--violet); border-radius:2px; }
+
+  /* header */
+  .site-header{
+    position:sticky; top:0; z-index:40;
+    background: rgba(7,5,11,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1040px; margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-brand{
+    display:flex; align-items:center; gap:10px;
+    font-family: var(--font-display); font-weight:800; letter-spacing:.04em;
+    color:#fff; font-size:1.15rem; text-decoration:none;
+  }
+  .nav-brand .mono{
+    width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    color:#0a0712; font-weight:800; font-size:1rem;
+    overflow:hidden;
+  }
+  .nav-brand .mono img{ width:100%; height:100%; object-fit:cover; }
+  .nav-links{ display:flex; gap:26px; align-items:center; }
+  .nav-links a{ color:var(--ink-soft); text-decoration:none; font-size:.9rem; font-weight:500; transition:color .2s; }
+  .nav-links a:hover{ color:var(--violet-bright); }
+  .nav-cta{
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    color:#0a0712 !important; padding:9px 22px; border-radius:8px; font-weight:700 !important;
+  }
+  .nav-cta:hover{ filter:brightness(1.08); }
+
+  .menu-toggle{
+    display:none; background:rgba(157,124,232,0.1); border:1px solid var(--line-deep);
+    color:var(--ink); width:38px; height:38px; border-radius:8px; cursor:pointer;
+    align-items:center; justify-content:center; flex-direction:column; gap:4px;
+  }
+  .menu-toggle span{ width:16px; height:2px; background:var(--ink); border-radius:2px; transition:transform .25s, opacity .25s; }
+  .menu-toggle.open span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2){ opacity:0; }
+  .menu-toggle.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+  .mobile-dropdown{
+    position:absolute; top:100%; left:0; right:0;
+    background: var(--paper-soft); border-bottom:1px solid var(--line-deep);
+    overflow:hidden; max-height:0; transition:max-height .3s ease;
+  }
+  .mobile-dropdown.open{ max-height:260px; }
+  .mobile-dropdown a{ display:block; padding:16px 24px; color:var(--ink-soft); text-decoration:none; font-size:.95rem; font-weight:500; border-top:1px solid var(--line); }
+  .mobile-dropdown a:hover{ color:var(--violet-bright); background:rgba(157,124,232,0.06); }
+  .mobile-dropdown a.nav-cta{ margin:14px 24px; text-align:center; border-top:none; }
+
+  /* hero */
+  .hero{ padding:90px 24px 80px; text-align:center; border-bottom:1px solid var(--line); }
+  .hero-logo-wrap{
+    width:104px; height:104px; margin:0 auto 30px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+    border:1px solid var(--line-deep); box-shadow:0 0 40px rgba(157,124,232,0.3);
+  }
+  .hero-logo-wrap span{ font-family:var(--font-display); font-weight:800; font-size:2.6rem; color:var(--violet-bright); }
+  .hero-logo-wrap img{ width:100%; height:100%; object-fit:cover; }
+
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(157,124,232,0.1); border:1px solid var(--line-deep); color:#d9cff5;
+    font-size:.72rem; font-weight:700; letter-spacing:.1em; padding:6px 16px; border-radius:100px; margin-bottom:26px;
+  }
+  .hero-badge .dot{ width:6px; height:6px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); }
+
+  .hero h1{
+    font-family:var(--font-display); font-weight:800; letter-spacing:-2px;
+    font-size:clamp(3rem, 8vw, 5.4rem); line-height:1;
+    background: linear-gradient(180deg, #fff 0%, var(--violet-bright) 55%, var(--violet) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent; direction:ltr;
+  }
+  .hero-tagline{
+    margin-top:22px; font-size:1.08rem; color:var(--ink-soft); font-weight:400;
+    max-width:520px; line-height:1.9; margin-left:auto; margin-right:auto;
+  }
+  .hero-actions{ margin-top:38px; display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+
+  .btn{
+    font-family:var(--font-body); font-weight:700; font-size:.94rem; padding:14px 32px;
+    border-radius:8px; cursor:pointer; border:none; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    transition: transform .25s, box-shadow .25s, background .25s, border-color .25s;
+  }
+  .btn-primary{
+    background: linear-gradient(135deg, var(--violet-bright) 0%, var(--violet) 100%);
+    color:#0a0712; box-shadow:0 8px 30px rgba(157,124,232,0.4);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 40px rgba(157,124,232,0.55); }
+  .btn-ghost{ background:rgba(157,124,232,0.06); color:#d9cff5; border:1px solid var(--line-deep); }
+  .btn-ghost:hover{ border-color:var(--violet); background:rgba(157,124,232,0.12); }
+  .btn-small{ padding:10px 20px; font-size:.85rem; }
+
+  /* network stats */
+  .stats-section{ border-bottom:1px solid var(--line); }
+  .stats-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-top:12px; }
+  .stat-card{
+    background: linear-gradient(180deg, rgba(22,17,13,0.9), rgba(10,8,6,0.95));
+    border:1px solid var(--line); border-radius:16px; padding:30px 18px; text-align:center;
+  }
+  .stat-dot{ width:8px; height:8px; border-radius:50%; background:var(--violet); margin:0 auto 14px; }
+  .stat-dot.online{ background:var(--green); box-shadow:0 0 10px var(--green); }
+  .stat-value{ font-family:var(--font-display); font-weight:800; font-size:2.2rem; color:#fff; }
+  .stat-label{ margin-top:8px; font-size:.85rem; color:var(--ink-soft); }
+  .stats-note{ margin-top:22px; text-align:center; font-size:.82rem; color:var(--ink-soft); }
+
+  /* servers */
+  .servers-header{ text-align:center; margin-bottom:56px; }
+  .servers-header .eyebrow{ justify-content:center; }
+  .servers-title{ font-family:var(--font-display); font-weight:800; font-size:clamp(1.8rem, 4vw, 2.6rem); color:#fff; }
+  .servers-sub{ margin-top:14px; color:var(--ink-soft); font-size:1rem; }
+
+  .servers-list{ display:flex; flex-direction:column; gap:22px; }
+
+  .server-card{
+    background: linear-gradient(180deg, rgba(22,17,13,0.9), rgba(10,8,6,0.95));
+    border:1px solid var(--line); border-radius:20px; padding:32px;
+    display:grid; grid-template-columns:104px 1fr auto; gap:26px; align-items:center;
+    position:relative; overflow:hidden;
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .server-card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:2px;
+    background: linear-gradient(90deg, transparent, var(--violet-bright), transparent); opacity:.7;
+  }
+  .server-card:hover{
+    transform:translateY(-4px); border-color:var(--line-deep);
+    box-shadow:0 24px 60px -26px rgba(157,124,232,0.4);
+  }
+
+  .server-ring{
+    width:104px; height:104px; border-radius:50%; padding:4px;
+    box-shadow:0 0 24px -4px rgba(157,124,232,0.5);
+  }
+  .server-ring-inner{
+    width:100%; height:100%; border-radius:50%; background:#0a0712;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .server-ring-inner img{ width:100%; height:100%; object-fit:cover; }
+  .server-ring-inner span{ font-family:var(--font-display); font-weight:800; font-size:1.8rem; color:var(--violet-bright); }
+
+  .server-main{ min-width:0; }
+  .server-top{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px; }
+  .server-name{ font-family:var(--font-display); font-weight:700; font-size:1.3rem; color:#fff; }
+  .server-type{
+    font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; font-weight:800;
+    color:#0a0712; background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    padding:4px 12px; border-radius:999px;
+  }
+  .server-desc{ color:var(--ink-soft); font-size:.94rem; line-height:1.75; margin-bottom:14px; max-width:56ch; }
+  .server-stats{ display:flex; gap:20px; flex-wrap:wrap; font-size:.86rem; color:var(--ink-soft); }
+  .server-stats .stat{ display:flex; align-items:center; gap:7px; }
+  .server-stats b{ color:#fff; font-weight:800; }
+  .stat-pulse{ width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); flex-shrink:0; }
+  .stat-pulse.off{ background:#4a463c; box-shadow:none; }
+
+  .server-actions{ display:flex; flex-direction:column; gap:10px; min-width:150px; }
+
+  @media (max-width: 720px){
+    .server-card{ grid-template-columns:1fr; text-align:center; }
+    .server-ring{ margin:0 auto; }
+    .server-top{ justify-content:center; }
+    .server-desc{ margin-left:auto; margin-right:auto; }
+    .server-stats{ justify-content:center; }
+    .server-actions{ width:100%; }
+  }
+
+  /* footer */
+  .site-footer{ padding:64px 24px 48px; text-align:center; border-top:1px solid var(--line); }
+  .footer-mark{ font-family:var(--font-display); font-weight:800; letter-spacing:.06em; color:var(--violet-bright); font-size:1.4rem; margin-bottom:10px; }
+  .site-footer p{ color:var(--ink-soft); font-size:.85rem; }
+
+  /* sticky join */
+  .sticky-join{
+    position:fixed; bottom:24px; left:50%; transform:translate(-50%, 30px);
+    opacity:0; pointer-events:none; transition:opacity .3s ease, transform .3s ease;
+    z-index:50; box-shadow:0 10px 40px rgba(0,0,0,.5), 0 8px 30px rgba(157,124,232,0.4);
+  }
+  .sticky-join.show{ opacity:1; transform:translate(-50%, 0); pointer-events:auto; }
+
+  @media (max-width: 760px){
+    .nav-links{ display:none; }
+    .menu-toggle{ display:flex; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  :focus-visible{ outline:2px solid var(--violet-bright); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<div class="bg-field"></div>
+<div class="bg-dust"></div>
+
+<div class="wrap">
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand"><span class="mono" id="navMono">H</span>HmM</a>
+    <nav class="nav-links">
+      <a href="#stats">Network Pulse</a>
+      <a href="#servers">Servers</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+  <div class="mobile-dropdown" id="mobileDropdown">
+    <a href="#stats">HmM Pulse</a>
+    <a href="#servers">Servers</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>HmM</h1>
+    <p class="hero-tagline">Official HmM Team Branches — Every branch has its own identity, all united under the HmM Team.</p>
+    <div class="hero-actions">
+      <a href="#servers" class="btn btn-primary">View Servers</a>
+      <a href="#stats" class="btn btn-ghost">Network Pulse</a>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section" id="stats">
+  <div class="container">
+    <div class="eyebrow"><span class="dash"></span>HmM Stats</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-dot"></div>
+        <div class="stat-value" id="totalMembers">—</div>
+        <div class="stat-label">Members</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-dot online"></div>
+        <div class="stat-value" id="totalOnline">—</div>
+        <div class="stat-label">Online</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-dot"></div>
+        <div class="stat-value" id="totalServers">—</div>
+        <div class="stat-label">Branches</div>
+      </div>
+    </div>
+    <p class="stats-note">HmM</p>
+  </div>
+</section>
+
+<section id="servers">
+  <div class="container">
+    <div class="servers-header">
+      <div class="eyebrow"><span class="dash"></span>servers<span class="dash"></span></div>
+      <h2 class="servers-title">servers</h2>
+      <p class="servers-sub">HmM Team Branches</p>
+    </div>
+
+    <div class="servers-list" id="serversList">
+      <!-- تُبنى تلقائياً من data-servers أدناه -->
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-mark">HmM</div>
+  <p>© 2026 HmM. جميع الحقوق محفوظة.</p>
+</footer>
+
+</div>
+
+<script>
+  // ===== عدّل هذي القائمة لإضافة/تعديل السيرفرات =====
+  const SERVERS = [
+    {
+      id: "falcon-town",
+      name: "Falcon Town RP",
+      type: "Roleplay",
+      description: "Roleplay Server — An upgraded experience with advanced systems, high-quality development, and unmatched community interaction.",
+      inviteCode: "hcdkwpYnXE",
+      logo: "falcon.png",
+      siteUrl: ""
+    },
+    {
+      id: "axis",
+      name: "Axis",
+      type: "community",
+      description: "Axis — A private gaming & social hub for chats, voice rooms, streams, and fun with friends.",
+      inviteCode: "rYnkYME9xj",
+      logo: "axis.png",
+      siteUrl: ""
+    },
+    {
+      id: "community",
+      name: "Zero",
+      type: "community",
+      description: "Zero — Gaming, voice chats, and community vibes.",
+      inviteCode: "zr0",
+      logo: "zr0.png",
+      siteUrl: ""
+    },
+    {
+      id: "avt",
+      name: "Zero",
+      type: "AVT",
+      description: "Your next Discord look starts here Discover high quality avatars premium banners profile decorations matching profile packs and exclusive designs created to make your profile one of a kind ",
+      inviteCode: "3Xb7T52w98",
+      logo: "avtr.png",
+      siteUrl: ""
+    }
+];
+
+
+  // ===== قائمة الجوال =====
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileDropdown = document.getElementById('mobileDropdown');
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    mobileDropdown.classList.toggle('open');
+  });
+  mobileDropdown.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menuToggle.classList.remove('open');
+      mobileDropdown.classList.remove('open');
+    });
+  });
+
+  
+  // ===== بناء بطاقات السيرفرات =====
+  const serversList = document.getElementById('serversList');
+
+  function formatNumber(n){
+    if (n === null || n === undefined) return "—";
+    return n.toLocaleString('en-US');
+  }
+
+  function animateCount(el, target){
+    if (target === null || target === undefined){ el.textContent = "—"; return; }
+    let current = 0;
+    const steps = 40;
+    const increment = target / steps || 0;
+    const interval = setInterval(() => {
+      current += increment;
+      if (current >= target){
+        el.textContent = formatNumber(target);
+        clearInterval(interval);
+      } else {
+        el.textContent = formatNumber(Math.floor(current));
+      }
+    }, 25);
+  }
+
+  function buildServerCard(server){
+    const card = document.createElement('article');
+    card.className = 'server-card';
+
+    const ring = document.createElement('div');
+    ring.className = 'server-ring';
+    ring.id = `ring-${server.id}`;
+    ring.style.background = 'conic-gradient(var(--violet-bright) 0%, rgba(157,124,232,0.15) 0)';
+
+    const ringInner = document.createElement('div');
+    ringInner.className = 'server-ring-inner';
+    if (server.logo){
+      const img = document.createElement('img');
+      img.src = server.logo;
+      img.alt = server.name;
+      img.loading = 'lazy';
+      ringInner.appendChild(img);
+    } else {
+      const initial = document.createElement('span');
+      initial.textContent = server.name.trim().charAt(0);
+      ringInner.appendChild(initial);
+    }
+    ring.appendChild(ringInner);
+
+    const main = document.createElement('div');
+    main.className = 'server-main';
+
+    const top = document.createElement('div');
+    top.className = 'server-top';
+    const name = document.createElement('span');
+    name.className = 'server-name';
+    name.id = `name-${server.id}`;
+    name.textContent = server.name;
+    const type = document.createElement('span');
+    type.className = 'server-type';
+    type.textContent = server.type;
+    top.append(name, type);
+
+    const desc = document.createElement('p');
+    desc.className = 'server-desc';
+    desc.textContent = server.description;
+
+    const stats = document.createElement('div');
+    stats.className = 'server-stats';
+
+    const onlineStat = document.createElement('span');
+    onlineStat.className = 'stat';
+    const pulse = document.createElement('span');
+    pulse.className = 'stat-pulse off';
+    pulse.id = `pulse-${server.id}`;
+    const onlineText = document.createElement('span');
+    onlineText.id = `online-${server.id}`;
+    onlineText.innerHTML = '<b>—</b> متصل';
+    onlineStat.append(pulse, onlineText);
+
+    const memberStat = document.createElement('span');
+    memberStat.className = 'stat';
+    memberStat.id = `members-${server.id}`;
+    memberStat.innerHTML = '<b>—</b> عضو';
+
+    stats.append(onlineStat, memberStat);
+
+    main.append(top, desc, stats);
+
+    const actions = document.createElement('div');
+    actions.className = 'server-actions';
+
+    const hasInvite = server.inviteCode && !server.inviteCode.includes('ضع-كود');
+    const joinBtn = document.createElement('a');
+    joinBtn.className = 'btn btn-primary btn-small';
+    joinBtn.textContent = hasInvite ? 'انضم الآن' : 'غير متاح حالياً';
+    if (hasInvite){
+      joinBtn.href = `https://discord.gg/${server.inviteCode}`;
+      joinBtn.target = '_blank';
+      joinBtn.rel = 'noopener noreferrer';
+    } else {
+      joinBtn.style.opacity = '.5';
+      joinBtn.style.pointerEvents = 'none';
+    }
+    actions.appendChild(joinBtn);
+
+    if (server.siteUrl){
+      const siteBtn = document.createElement('a');
+      siteBtn.className = 'btn btn-ghost btn-small';
+      siteBtn.textContent = 'تصفّح الموقع';
+      siteBtn.href = server.siteUrl;
+      siteBtn.target = '_blank';
+      siteBtn.rel = 'noopener noreferrer';
+      actions.appendChild(siteBtn);
+    }
+
+    card.append(ring, main, actions);
+    return card;
+  }
+
+  SERVERS.forEach(server => serversList.appendChild(buildServerCard(server)));
+
+  // ===== جلب البيانات الحيّة من ديسكورد (رابط الدعوة العام - بدون بوت) =====
+  async function fetchInvite(inviteCode){
+    const res = await fetch(`https://discord.com/api/v10/invites/${inviteCode}?with_counts=true&with_expiration=true`);
+    if (!res.ok) throw new Error('invite fetch failed');
+    return res.json();
+  }
+
+  async function loadNetworkStats(){
+    let totalMembers = 0, totalOnline = 0, validCount = 0;
+
+    await Promise.all(SERVERS.map(async server => {
+      const hasInvite = server.inviteCode && !server.inviteCode.includes('ضع-كود');
+      if (!hasInvite) return;
+
+      try{
+        const data = await fetchInvite(server.inviteCode);
+        const members = data.approximate_member_count;
+        const online = data.approximate_presence_count;
+        const guild = data.guild || {};
+
+        if (typeof members === 'number') totalMembers += members;
+        if (typeof online === 'number') totalOnline += online;
+        validCount++;
+
+        const nameEl = document.getElementById(`name-${server.id}`);
+        if (nameEl && guild.name) nameEl.textContent = guild.name;
+
+        const ring = document.getElementById(`ring-${server.id}`);
+        if (ring && guild.icon && !server.logo){
+          const ext = guild.icon.startsWith('a_') ? 'gif' : 'png';
+          const iconUrl = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${ext}`;
+          const inner = ring.querySelector('.server-ring-inner');
+          inner.innerHTML = '';
+          const img = document.createElement('img');
+          img.src = iconUrl;
+          img.alt = guild.name || server.name;
+          img.loading = 'lazy';
+          inner.appendChild(img);
+        }
+
+        if (ring && typeof members === 'number' && typeof online === 'number' && members > 0){
+          const pct = Math.max(Math.min((online / members) * 100, 100), online ? 6 : 0);
+          ring.style.background = `conic-gradient(var(--violet-bright) ${pct}%, rgba(157,124,232,0.15) 0)`;
+        }
+
+        const onlineEl = document.getElementById(`online-${server.id}`);
+        if (onlineEl) onlineEl.innerHTML = `<b>${formatNumber(online)}</b> متصل`;
+
+        const membersEl = document.getElementById(`members-${server.id}`);
+        if (membersEl) membersEl.innerHTML = `<b>${formatNumber(members)}</b> عضو`;
+
+        const pulseEl = document.getElementById(`pulse-${server.id}`);
+        if (pulseEl && online) pulseEl.classList.remove('off');
+
+      } catch(err){
+        console.warn(`تعذّر جلب بيانات ${server.name}:`, err);
+      }
+    }));
+
+    animateCount(document.getElementById('totalMembers'), totalMembers);
+    animateCount(document.getElementById('totalOnline'), totalOnline);
+    document.getElementById('totalServers').textContent = SERVERS.length;
+  }
+
+  loadNetworkStats();
+</script>
+
+</body>
+</html>
