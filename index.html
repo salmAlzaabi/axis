@@ -495,7 +495,7 @@
     const hasInvite = server.inviteCode && !server.inviteCode.includes('ضع-كود');
     const joinBtn = document.createElement('a');
     joinBtn.className = 'btn btn-primary btn-small';
-    joinBtn.textContent = hasInvite ? 'انضم الآن' : 'غير متاح حالياً';
+    joinBtn.textContent = hasInvite ? 'Join' : 'Eror';
     if (hasInvite){
       joinBtn.href = `https://discord.gg/${server.inviteCode}`;
       joinBtn.target = '_blank';
